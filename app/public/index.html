@@ -7,10 +7,9 @@
     <link rel="stylesheet" href="css/style.css" >
 </head>
 <body ng-controller="myCtrl">
-     
     <div class="list-group" >
-      <h2 class="list-group-item">Circle</h2>
-      <a ng-href="http://localhost:8080/categories.html?cat={{category.name}}" class="list-group-item" ng-repeat="category in circle.categories" style="color:{{category.color}}">{{category.name}}</a>
+       <section class="list-group-item" id="logo"></section>
+      <a ng-href="http://localhost:8080/categories.html?cat={{category.name}}" class="list-group-item" ng-repeat="category in circle.categories" style="color:{{category.color}};background-image:url(images/{{category.url}});">{{category.name}}</a>
     </div>
           <script src="js/lib/angular/angular.min.js"></script>
           <script src="js/circle.js"></script>

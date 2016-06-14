@@ -1,0 +1,50 @@
+
+
+*{
+  margin: 0px;
+  padding: 0px;
+  
+}
+header, footer, main, aside, article, section, nav {
+  display:block;
+}
+
+a{
+  text-decoration:none;
+}
+
+.list-group{
+  text-align: center;
+}
+
+.jumbotron{
+
+font-family: "Comic Sans MS";
+}
+
+.posi{
+  text-align: center;
+
+}
+
+.posi2{
+
+  margin: 45px;
+}
+
+a.lead{
+  text-decoration:none;
+  color: #000;
+}
+
+a.lead: hover{
+  text-decoration:none;
+}
+
+/*a.navbar-link{
+  text-decoration:none;
+  font-size: 20px;
+  font-family: "Verdana";
+  margin: 150px;
+}
+*/

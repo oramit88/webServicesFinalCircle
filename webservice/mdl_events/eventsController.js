@@ -70,7 +70,6 @@ exports.getAllUsers=function(req,res){
 }
 
 
-
  exports.setLikeToEvent=function(req,res){
         console.log("test: in EventsController- setLikeToEvent2 function");
         var CurrentUserEmail="oramit88@gmail.com";
@@ -82,12 +81,57 @@ exports.getAllUsers=function(req,res){
 
         query.exec(function(err,results){
             if(err){
-                console.log("error update is:"+err);
+                console.log("err is:"+err);
             }
-            console.log("\n result object after update:"+doc.name)
+            else{
+                console.log("\n finishing Update");
+            }
         });
-        res.json(doc);  
+        res.json("ok");  
  }
 
 
+ exports.setUnLikeToEvent=function(req,res){
+        console.log("test: in EventsController- setUnLikeToEvent function");
+        var CurrentUserEmail="oramit88@gmail.com";
+        var eventID = req.params.eventId;
+        console.log("test: my EventID: "+eventID);
+        var query= userModel.update({email: "oramit88@gmail.com"},{
+              $pullAll:{like:[eventID]}
+        });
+
+        query.exec(function(err,results){
+            if(err){
+                console.log("error update is:"+err);
+            }
+            else{
+                console.log("\n finishingUpdate");
+            }
+        });
+        res.json("ok");  
+ }
+
+exports.getEventsByUser=function(req,res){
+        var CurrentUserEmail="oramit88@gmail.com";
+        console.log("test: in EventsController- getEventsByUser function");
+        //var category = req.params.category;
+        //console.log("test my user is: "+CurrentUserEmail);
+        var query=userModel.find().where('email',CurrentUserEmail);
+        query.exec(function(err,doc){
+            console.log("searching user events");
+            if(err){
+                console.log("error is:"+err);
+                throw err;
+            }
+            else{
+                console.log("the ivents is:\n" +doc[0].like);
+                //var numberOfEvents=doc[0].like.length;
+                var LikeEventsArray=doc[0].like;
+                eventModel.find({'id':{$in:LikeEventsArray}}).exec(function(err,docs){
+                    res.json(docs);
+                })
+                //res.json(doc);
+            }
+        });
+ }
 

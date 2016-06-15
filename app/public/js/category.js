@@ -20,7 +20,7 @@ categoryApp.run(function($http){
 });
 
 
-categoryApp.controller("myEvent", function($scope) {
+categoryApp.controller("myEvent", function($scope,$http) {
     $scope.events = model;
     $scope.index = 0;
   
@@ -36,6 +36,24 @@ categoryApp.controller("myEvent", function($scope) {
              }
             //$scope.todo.items.push({action:actionText, done:false});
     };
+
+    $scope.changeImage =function() {
+        var image = document.getElementById('myImage');
+        if (image.src.match("unlike")) {
+            image.src = "images/like.png";
+            $http.get("http://localhost:3000/setLikeToEvent/"+$scope.events.eventsList[$scope.index].id).success(function(data){
+                console.log("client receive from set like:"+data); 
+            });
+        } 
+        else {
+            image.src = "images/unlike.png";
+            $http.get("http://localhost:3000/setUnLikeToEvent/"+$scope.events.eventsList[$scope.index].id).success(function(data){
+                console.log("client receive from set Un-like:"+data); 
+            });
+        }
+
+
+    }   
 });
 
 //new from here

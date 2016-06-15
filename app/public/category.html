@@ -10,7 +10,7 @@
  
  <body ng-controller="myEvent" >
     <div class="jumbotron">
-          <h1 class="display-3">{{events.eventsList[index].name}}</h1>
+          <h1 class="display-3">{{events.eventsList[index].name}}<img id="myImage" src="images/unlike.png" ng-click="changeImage()"></h1>
           <p><a href="#" class="lead">{{events.eventsList[index].short_description}}</a></p>
           <hr class="m-y-2">
           <p class="posi"><span class="glyphicon glyphicon-map-marker"></span>{{events.eventsList[index].distance}}<span class="posi2">{{events.eventsList[index].category}}</span>&#8362;{{events.eventsList[index].price}}</p>
@@ -21,6 +21,7 @@
       <p><a href="#" class="navbar-link">TODAY</a></p>
       </nav>
     </div>
+
         <script src="js/lib/angular/angular.min.js"></script>
         <script src="js/category.js"></script>
 </body>

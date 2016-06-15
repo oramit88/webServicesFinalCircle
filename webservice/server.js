@@ -24,6 +24,8 @@ app.get("/",function(req,res){ //the regular route - send beck the html API docu
 app.get('/getAllCategories',eventsModuleController.getAllCategories);
 app.get('/getAllEvents',eventsModuleController.getAllEvents);
 app.get('/getEventsByCategory/:category',eventsModuleController.getEventsByCategory);
+app.get('/getAllUsers',eventsModuleController.getAllUsers);
+app.get('/setLikeToEvent/:eventId',eventsModuleController.setLikeToEvent);
 
 
 

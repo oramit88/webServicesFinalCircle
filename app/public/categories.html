@@ -1,27 +1,17 @@
 <!DOCTYPE html>
-<html ng-app="categoryApp">
+<html ng-app="circleApp">
 <head>
     <title>Cicle app</title>
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="css/style.css" >
- </head>
- 
- <body ng-controller="myEvent" >
-    <div class="jumbotron">
-          <h1 class="display-3">{{events.eventsList[index].name}}</h1>
-          <p><a href="#" class="lead">{{events.eventsList[index].short_description}}</a></p>
-          <hr class="m-y-2">
-          <p class="posi"><span class="glyphicon glyphicon-map-marker"></span>{{events.eventsList[index].distance}}<span class="posi2">{{events.eventsList[index].category}}</span>&#8362;{{events.eventsList[index].price}}</p>
-          <p class="lead">
-          <button type="button" class="btn btn-default" ng-click="goNextEvent()"> GO </button>
-          </p>
-      <nav class="navbar navbar-inverse">
-      <p><a href="#" class="navbar-link">TODAY</a></p>
-      </nav>
+</head>
+<body ng-controller="myCtrl">
+    <div class="list-group" >
+       <section class="list-group-item" id="logo"></section>
+      <a ng-href="http://localhost:8080/category.html?cat={{category.name}}" class="list-group-item" ng-repeat="category in circle.categories" style="color:{{category.color}};background-image:url(images/{{category.url}});">{{category.name}}</a>
     </div>
-        <script src="js/lib/angular/angular.min.js"></script>
-        <script src="js/category.js"></script>
+          <script src="js/lib/angular/angular.min.js"></script>
+          <script src="js/categories.js"></script>
 </body>
- </html>
+</html>

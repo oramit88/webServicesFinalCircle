@@ -4,7 +4,7 @@ var categoryModel=require('./categories');//the schema
 var userModel=require('./user');
 
 
-//getAll categories
+//get All categories from categories collection
 exports.getAllCategories=function(req,res){   
     console.log("test: in EventsController- getAllCategories function");
     categoryModel.find({}).exec(function(err,docs){
@@ -18,10 +18,9 @@ exports.getAllCategories=function(req,res){
    });
 }
 
-//returns the the data from mongo DB.
+//returns the the events from mongo DB.
 exports.getAllEvents=function(req,res){   
     console.log("test: in EventsController- getAllEvents function");
-
     eventModel.find({}).exec(function(err,docs){
         if(err){
             console.log("error is"+err);
@@ -32,16 +31,12 @@ exports.getAllEvents=function(req,res){
         return ; 
    });
 }
-
-
-
-//returns the Json with the student details by his id number. 
+ 
 //EXAMPLE - http://localhost:3000/getEventsByCategory/MUSIC
  exports.getEventsByCategory=function(req,res){
         console.log("test: in EventsController- getEventsByCategory function");
         var category = req.params.category;
         console.log("test my category is: "+category);
-
         var query=eventModel.find().where('category',category);
         query.exec(function(err,doc){
             console.log("searching...");
@@ -78,13 +73,12 @@ exports.getAllUsers=function(req,res){
         var query= userModel.update({email: "oramit88@gmail.com"},{
               $addToSet:{like:eventID}
         });
-
         query.exec(function(err,results){
             if(err){
                 console.log("err is:"+err);
             }
             else{
-                console.log("\n finishing Update");
+                console.log("\n finishing Update like to event");
             }
         });
         res.json("ok");  
@@ -105,17 +99,18 @@ exports.getAllUsers=function(req,res){
                 console.log("error update is:"+err);
             }
             else{
-                console.log("\n finishingUpdate");
+                console.log("\n finishingUpdate UnLike to Event");
             }
         });
         res.json("ok");  
  }
 
+//returns current logedIn user events
 exports.getEventsByUser=function(req,res){
-        var CurrentUserEmail="oramit88@gmail.com";
+        var CurrentUserEmail="oramit88@gmail.com"; //will change after g+ implementation.
         console.log("test: in EventsController- getEventsByUser function");
-        //var category = req.params.category;
         //console.log("test my user is: "+CurrentUserEmail);
+        //finding the current user in users collection and searching the events in events collection.
         var query=userModel.find().where('email',CurrentUserEmail);
         query.exec(function(err,doc){
             console.log("searching user events");

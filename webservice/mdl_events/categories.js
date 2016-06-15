@@ -1,6 +1,6 @@
  var mongoose=require('mongoose');
  var schema=mongoose.Schema;
- var categorySchema=new schema({ //schema definition
+ var categorySchema=new schema({ //categories schema definition
     categories:[{name:String,color:String}]
  }, {collection:'categories'});
 

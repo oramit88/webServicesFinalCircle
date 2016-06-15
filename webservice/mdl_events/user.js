@@ -1,6 +1,6 @@
  var mongoose=require('mongoose');
  var schema=mongoose.Schema;
- var userSchema=new schema({ //schema definition
+ var userSchema=new schema({ //user schema definition
     name: String,
     email: {type:String,required:true,unique:true},
     friends_email: [String],

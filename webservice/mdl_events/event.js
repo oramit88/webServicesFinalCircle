@@ -1,6 +1,6 @@
  var mongoose=require('mongoose');
  var schema=mongoose.Schema;
- var eventSchema=new schema({ //schema definition
+ var eventSchema=new schema({ //event schema definition
     name: String,
     category: String,
     date: String,

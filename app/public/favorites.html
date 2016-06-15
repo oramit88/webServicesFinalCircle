@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html ng-app="favoritesApp">
+<head>
+    <title>Cicle app</title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="css/style.css" >
+</head>
+<body ng-controller="myCtrl">
+    <div class="list-group" id="font" >
+       <section class="list-group-item" id="logo">
+         <a href="index.html"><button type="button" class="btn btn-default" id="home">
+          <span class="glyphicon glyphicon-home"></span>
+          </button></a>
+       </section>
+       <div id="favoriteColor">
+           <a ng-href="#" class="list-group-item" ng-repeat="favorite in likeList.favoritesEvents" id="{{favorite.category}}">{{favorite.name}}</a>
+       </div>
+    </div>
+          <script src="js/lib/angular/angular.min.js"></script>
+          <script src="js/favorites.js"></script>
+</body>
+</html>

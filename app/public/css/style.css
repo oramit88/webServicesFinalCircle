@@ -35,8 +35,18 @@ a.lead: hover{
   color: #000;
 }
 
+a.jumbotron: hover{
+  text-decoration:none;
+  color: #000;
+}
+
 #optionsMenu a{
   text-decoration:none;
+}
+
+#description{
+  text-decoration:none;
+  color: #000;
 }
 #logo{
   background-image: url(../images/circle_logo.png);
@@ -88,7 +98,7 @@ button.list-group-item{
   bottom: 0px;
 }
 
-#test{
+#logo2{
   background-image: url(../images/cirle.png);
   height: 72px;
   background-repeat: no-repeat;
@@ -102,6 +112,55 @@ button.list-group-item{
  position: fixed;
  bottom: 70px;
 
+}
+
+#home{
+  float:right;
+  margin-top: 30px;
+}
+
+#font{
+  font-family: "Comic Sans MS";
+}
+
+#favoriteColor a{
+  background: #575755;
+}
+
+#ALL{
+  color: #ffffff;
+}
+
+#MUSIC{
+  color: #3bfa9f;
+}
+
+#ART{
+  color: #9649f7;
+}
+
+#NIGHTLIFE{
+  color: #33cefa;
+}
+
+#RESTARANTS{
+  color: #00ff85;
+}
+
+#BARS&PUBS{
+  color: #f600ff;
+}
+
+#FILMS{
+  color: #fffb92;
+}
+
+#THEATRE{
+  color: #ff6266;
+}
+
+#ATTRACTIONS{
+  color: #fffca3;
 }
 
 /*a.navbar-link{

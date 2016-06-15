@@ -1,7 +1,7 @@
 var categoryApp = angular.module('categoryApp',[]);
 var pageUrl = window.location.search.substring(1).split("&");
 var catId = pageUrl[0].split("=")[1];
-//console.log("path is:"+catId);
+console.log("cat id is:"+catId);
 
 
 var model = {
@@ -11,7 +11,7 @@ var numOfEvents;
 
 
 categoryApp.run(function($http){
-    $http.get("http://localhost:3000/getEventsByCategory/"+catId).success(function(data){
+    $http.get("https://circlews.herokuapp.com/getEventsByCategory/"+catId).success(function(data){
         console.log("getting eventts from server..."); 
         model.eventsList=data;
          numOfEvents=data.length;
@@ -23,13 +23,10 @@ categoryApp.run(function($http){
 categoryApp.controller("myEvent", function($scope,$http) {
     $scope.events = model;
     $scope.index = 0;
-  
-    //console.log($scope.events.eventsList.length);
-    // $scope.name=name;
-    // console.log("scope category is:"+category1);   
-    // $scope.short_desc=short_description;
-    // $scope.distance=distance;
+    
     $scope.goNextEvent=function(){
+            var image = document.getElementById('myImage');
+            image.src = "images/unlike.png";
              $scope.index++;
              if($scope.index==numOfEvents){
                 $scope.index=0;
@@ -41,34 +38,15 @@ categoryApp.controller("myEvent", function($scope,$http) {
         var image = document.getElementById('myImage');
         if (image.src.match("unlike")) {
             image.src = "images/like.png";
-            $http.get("http://localhost:3000/setLikeToEvent/"+$scope.events.eventsList[$scope.index].id).success(function(data){
-                console.log("client receive from set like:"+data); 
+            $http.get("https://circlews.herokuapp.com/setLikeToEvent/"+$scope.events.eventsList[$scope.index].id).success(function(data){
+            console.log("set like:" + data);
             });
         } 
         else {
             image.src = "images/unlike.png";
-            $http.get("http://localhost:3000/setUnLikeToEvent/"+$scope.events.eventsList[$scope.index].id).success(function(data){
-                console.log("client receive from set Un-like:"+data); 
-            });
         }
 
 
     }   
 });
-
-//new from here
-
-// var categoryApp = angular.module('myApp', []);
-// categoryApp.controller('myEvent', function($scope, $http) {
-//     $http({
-//         method : "GET",
-//         url : "http://localhost:3000/getEventsByCategory/"+catId
-//     }).then(function mySucces(response) {
-//         console.log(response.data);
-//         //$scope.myWelcome = response.data;
-//     }, function myError(response) {
-//        console.log("error"+response.statusText);
-//         //$scope.myWelcome = response.statusText;
-//     });
-// });
 

@@ -2,7 +2,7 @@ var mongoose=require('mongoose');
 var eventModel=require('./event');//the schema
 var categoryModel=require('./categories');//the schema
 var userModel=require('./user');
-
+var url=require ('url');
 
 //get All categories from categories collection
 exports.getAllCategories=function(req,res){   
@@ -156,5 +156,92 @@ exports.getEventsByUser=function(req,res){
             }
         });
  }
+
+
+//NEED TO FIXXX !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ //EXAMPLE - http://localhost:3000/getEvantsThatUserInvaitedTo/oramit88@gmail.com
+ exports.getEvantsThatUserInvaitedTo=function(req,res){
+        console.log("test: in getEvantsThatUserInvaitedTo- getEvantsThatUserInvaitedTo function");
+        var userMail = req.params.userMail;
+        console.log("test: User mail is: "+userMail);
+        var query=userModel.find().where('email',userMail); //finding the current user
+        query.exec(function(err,doc){
+            console.log("searching...");
+            if(err){
+                console.log("error is:"+err);
+                throw err;
+            }
+            else{
+                console.log("RESULT emails IS:\n" +doc[0].invited_to);
+                var numOfEvents= doc[0].invited_to.length;
+                console.log("number of events is: "+ numOfEvents);
+                 var convertedJSON;
+                 var EventId;
+                // for(var i = 0 ; i < numOfEvents;i++){
+                     
+                // }
+                convertedJSON = JSON.parse(JSON.stringify(doc[0].invited_to[0]));
+                EventId=convertedJSON.event_id;
+                var intEventId = parseInt(EventId);
+              
+               console.log("events Id is: "+ intEventId);
+
+
+               var query2=eventModel.find().where('id',intEventId);
+               var eventName;
+                query2.exec(function(err,doc){
+                    if(err){
+                        console.log("error is:"+err);
+                        throw err;
+                    }
+                    else{
+                        
+                        console.log(doc[0].name);
+                        eventName=doc[0].name;
+                        convertedJSON.newName = eventName ;
+                        //res.json(doc);
+                    }
+                
+                });
+
+
+                //console.log("ttt"+eventName);
+
+                doc[0].invited_to[0]=convertedJSON;
+                //{"name4" : "value4"}
+               // data['propertyTwo'] = 'whatever'
+                //var friendsArray=doc[0].friends_email; //holdind array with firend mail
+                //find the user firends and return their json
+                // userModel.find({'email':{$in:friendsArray}}).exec(function(err,docs){
+                //     var friendList=docs;
+                //     res.json(docs);
+                // })
+                res.json(doc[0].invited_to);
+            }
+        });
+ }
+
+exports.findEventsByTimeAndPrice=function(req,res){
+        console.log("test: in findEventsByTimeAndPrice- findEventsByTimeAndPrice function");
+        var urlPart=url.parse(req.url,true);
+        var query=urlPart.query;
+        var searchTime=query.time;
+        var searchPrice=query.price;
+        //console.log("the time is: " +time+" the price is: "+price);
+
+        eventModel.find({time:searchTime}).where('price').lte(searchPrice).exec(function(err,doc){
+            console.log("searching...");
+            if(err){
+                console.log("error is:"+err);
+                throw err;
+            }
+            else{
+                console.log("RESULT  IS:\n" +doc);
+                res.json(doc);
+           
+            }
+        });
+ }
+
 
 

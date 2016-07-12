@@ -1,4 +1,3 @@
-//test
 var express=require ('express');
 var app=express();
 var eventsModuleController=require('./mdl_events/eventsController');
@@ -29,6 +28,7 @@ app.get('/getAllUsers',eventsModuleController.getAllUsers);
 app.get('/setLikeToEvent/:eventId',eventsModuleController.setLikeToEvent);
 app.get('/setUnLikeToEvent/:eventId',eventsModuleController.setUnLikeToEvent);
 app.get('/getEventsByUser',eventsModuleController.getEventsByUser);
+app.get('/getFriendsByUserMail/:userMail',eventsModuleController.getFriendsByUserMail);
 
 
 app.listen(port);

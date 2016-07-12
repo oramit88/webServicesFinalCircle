@@ -130,3 +130,31 @@ exports.getEventsByUser=function(req,res){
         });
  }
 
+
+ //EXAMPLE - http://localhost:3000/getFriendsByUserMail/oramit88@gmail.com
+ //Return value- json with the user friends
+ exports.getFriendsByUserMail=function(req,res){
+        console.log("test: in getFriendsByUserMail- getFriendsByUserMail function");
+        var userMail = req.params.userMail;
+        console.log("test: User mail is: "+userMail);
+        var query=userModel.find().where('email',userMail); //finding the current user
+        query.exec(function(err,doc){
+            console.log("searching...");
+            if(err){
+                console.log("error is:"+err);
+                throw err;
+            }
+            else{
+                console.log("RESULT emails IS:\n" +doc[0].friends_email);
+                var friendsArray=doc[0].friends_email; //holdind array with firend mail
+                //find the user firends and return their json
+                userModel.find({'email':{$in:friendsArray}}).exec(function(err,docs){
+                    var friendList=docs;
+                    res.json(docs);
+                })
+                //res.json(doc[0].friends_email);
+            }
+        });
+ }
+
+

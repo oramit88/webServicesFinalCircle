@@ -158,8 +158,8 @@ exports.getEventsByUser=function(req,res){
  }
 
 
-//NEED TO FIXXX !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
- //EXAMPLE - http://localhost:3000/getEvantsThatUserInvaitedTo/oramit88@gmail.com
+//working!
+//EXAMPLE - http://localhost:3000/getEvantsThatUserInvaitedTo/oramit88@gmail.com
  exports.getEvantsThatUserInvaitedTo=function(req,res){
         console.log("test: in getEvantsThatUserInvaitedTo- getEvantsThatUserInvaitedTo function");
         var userMail = req.params.userMail;
@@ -172,51 +172,37 @@ exports.getEventsByUser=function(req,res){
                 throw err;
             }
             else{
-                console.log("RESULT emails IS:\n" +doc[0].invited_to);
+                //console.log("RESULT emails IS:\n" +doc[0].invited_to);
                 var numOfEvents= doc[0].invited_to.length;
-                console.log("number of events is: "+ numOfEvents);
-                 var convertedJSON;
-                 var EventId;
-                // for(var i = 0 ; i < numOfEvents;i++){
-                     
-                // }
-                convertedJSON = JSON.parse(JSON.stringify(doc[0].invited_to[0]));
-                EventId=convertedJSON.event_id;
-                var intEventId = parseInt(EventId);
+                //console.log("number of events is: "+ numOfEvents);
+                var eventName;
+                var intEventId;
+
+                var eventsIdsArray=[];
+                for(var i = 0 ; i < numOfEvents; i++){
+                    intEventId=parseInt(doc[0].invited_to[i].event_id);
+                    //console.log("events Id is: "+ intEventId);
+                     eventsIdsArray.push(intEventId);
+                }
+                console.log("eventsIdsArray"+ eventsIdsArray);
               
-               console.log("events Id is: "+ intEventId);
-
-
-               var query2=eventModel.find().where('id',intEventId);
-               var eventName;
-                query2.exec(function(err,doc){
-                    if(err){
-                        console.log("error is:"+err);
-                        throw err;
+                eventModel.find({'id':{$in:eventsIdsArray}}).sort("id").exec(function(err,docs){ 
+                    var  eventsArray=[];
+                    console.log("see status?");
+                    console.log(doc[0].invited_to[0].status);
+                    docsAmounth=docs.length;
+                    console.log("size is"+docsAmounth);
+                    for(var i=0; i<docsAmounth;i++){ 
+                        var convertedJSON = JSON.parse(JSON.stringify(docs[i]));
+                        convertedJSON.status=doc[0].invited_to[i].status; //adding "status" field
+                        convertedJSON.invited_by=doc[0].invited_to[i].invited_by; //adding "invited_by" field
+                        eventsArray.push(convertedJSON);
+                        //console.log("arr is "+ eventsIdsArray);
+                        //console.log("docs is \n");
                     }
-                    else{
-                        
-                        console.log(doc[0].name);
-                        eventName=doc[0].name;
-                        convertedJSON.newName = eventName ;
-                        //res.json(doc);
-                    }
-                
-                });
+                     res.json(eventsArray);    
+                })
 
-
-                //console.log("ttt"+eventName);
-
-                doc[0].invited_to[0]=convertedJSON;
-                //{"name4" : "value4"}
-               // data['propertyTwo'] = 'whatever'
-                //var friendsArray=doc[0].friends_email; //holdind array with firend mail
-                //find the user firends and return their json
-                // userModel.find({'email':{$in:friendsArray}}).exec(function(err,docs){
-                //     var friendList=docs;
-                //     res.json(docs);
-                // })
-                res.json(doc[0].invited_to);
             }
         });
  }
@@ -242,6 +228,3 @@ exports.findEventsByTimeAndPrice=function(req,res){
             }
         });
  }
-
-
-

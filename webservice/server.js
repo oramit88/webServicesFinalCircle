@@ -31,13 +31,19 @@ app.get('/setUnLikeToEvent/:eventId',eventsModuleController.setUnLikeToEvent);
 app.get('/getEventsByUser',eventsModuleController.getEventsByUser);
 app.get('/getFriendsByUserMail/:userMail',eventsModuleController.getFriendsByUserMail);
 
-//need to fixXXXXXXXXXXXXXXXX
+//working!
+//localhost:3000/getEvantsThatUserInvaitedTo/oramit88@gmail.com
+
+
 app.get('/getEvantsThatUserInvaitedTo/:userMail',eventsModuleController.getEvantsThatUserInvaitedTo);
 
-//now working on it
+
 //EXAMPLE - http://localhost:3000/findEventsByTimeAndPrice?time=23:00&price=80
 app.get('/findEventsByTimeAndPrice',eventsModuleController.findEventsByTimeAndPrice);
 
 
+
+
 app.listen(port);
 console.log('listening on port' + port);
+

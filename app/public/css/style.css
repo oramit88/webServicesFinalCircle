@@ -11,11 +11,14 @@ a{
   text-decoration:none;
 }
 
+@media (max-width: 990px) {
+
 .list-group{
   text-align: center;
+  width: 100%;
 }
 
-.jumbotron{
+a.jumbotron{
 
 font-family: "Comic Sans MS";
 background: #b5afaf;
@@ -23,12 +26,16 @@ background: #b5afaf;
 
 .posi{
   text-align: center;
-
 }
 
 .posi2{
   margin: 45px;
 }
+
+#iconPosi p,span{
+  font-size: 50px;
+}
+
 
 a.lead: hover{
   text-decoration:none;
@@ -44,15 +51,30 @@ a.jumbotron: hover{
   text-decoration:none;
 }
 
-#description{
-  text-decoration:none;
-  color: #000;
+a.list-group-item{
+  height: 130px;
+  font-size: 80px;
 }
+
+#categoriesPosi a.list-group-item{
+  height: 164px;
+  font-size: 80px;
+}
+
 #logo{
-  background-image: url(../images/circle_logo.png);
-  width: 100%;
-  height: 95px;
+  background-image: url(../images/circle2.png);
+  height: 100px;
   background-repeat: no-repeat;
+  background-position: 50%;
+  background-color: #000;
+}
+
+.colorImgFavo{
+ background-image: url(../images/colors.png);
+ width: 100%;
+ height: 7px;
+ position: fixed;
+ top: 100px;
 }
 
 a{
@@ -60,6 +82,7 @@ a{
   font-size: 25px;
   height: 70px;
   background-repeat: no-repeat;
+  margin-top: 4px;
 
 }
 
@@ -69,38 +92,39 @@ a{
 }
 
 #optionsMenu{
-  background-image: url(../images/options.png);
+  background-image: url(../images/options3.png);
   width: 100%;
-  height: 736px;
+  height: auto;
   background-repeat: no-repeat;
   overflow:hidden;
-
 }
 
 button.list-group-item{
-  top: 352px;
+  top: 670px;
   background-color: #27251d;
   border: none;
-  font-size: 17px;
+  font-size: 85px;
   font-weight: bold;
   text-align: center;
   color: #FFF;
   font-family: "Comic Sans MS";
   margin-top: 4px;
+  opacity: 0.6;
 }
 
 #bottomBar{
   background-color: #000;
   position: relative;
   width: 100%;
-  height: 70px;
+  height: 155px;
   position: fixed;
   bottom: 0px;
 }
 
 #logo2{
-  background-image: url(../images/cirle.png);
-  height: 72px;
+  background-image: url(../images/circle2.png);
+  height: 80px;
+  margin-top: 30px;
   background-repeat: no-repeat;
   background-position: 50%;
 }
@@ -110,17 +134,74 @@ button.list-group-item{
  width: 100%;
  height: 6px;
  position: fixed;
- bottom: 70px;
+ bottom: 155px;
+}
+
+.g-signin2{
+  margin: 50% auto;
+  bottom: 20px;
+  position: fixed;
+  right: 340px;
+}
+
+#test div{
+  width: 290px;
+}
+.loginImg{
+ background-image: url(../images/login.png);
+ width: 100%;
+ height: 100%;
+}
+
+#my-signin2{
+  position: fixed;
+  bottom: 20px;
+  margin: 50% auto;
+  margin-left: 230px;
 
 }
 
 #home{
   float:right;
-  margin-top: 30px;
+  margin-top: 10px;
+  height: 60px;
+  font-size: 35px;
 }
 
 #font{
   font-family: "Comic Sans MS";
+
+}
+
+h1.display-3{
+  font-size: 100px;
+}
+
+.jumbotron{
+  opacity: 0.7;
+  bottom: 10%;
+  position: fixed;
+  background-color: #000;
+}
+
+#description{
+  text-decoration:none;
+  color: #FFF;
+  font-size: 50px;
+}
+
+#goButn{
+  float: right;
+  margin-right: 12px;
+}
+
+#categoryImg{
+  background: no-repeat;
+  width: 100%;
+  height: 100%;
+  color: #FFF;
+  background-color: #000;
+  display: block;
 }
 
 #favoriteColor a{
@@ -162,7 +243,7 @@ button.list-group-item{
 #ATTRACTIONS{
   color: #fffca3;
 }
-
+}
 /*a.navbar-link{
   text-decoration:none;
   font-size: 20px;
@@ -170,3 +251,5 @@ button.list-group-item{
   margin: 150px;
 }
 */
+
+

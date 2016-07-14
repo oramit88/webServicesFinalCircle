@@ -10,15 +10,16 @@
 <body ng-controller="myCtrl">
     <div class="list-group" id="font" >
        <section class="list-group-item" id="logo">
+       <div class="colorImgFavo"></div>
          <a href="index.html"><button type="button" class="btn btn-default" id="home">
           <span class="glyphicon glyphicon-home"></span>
           </button></a>
        </section>
        <div id="favoriteColor">
-           <a ng-href="#" class="list-group-item" ng-repeat="favorite in likeList.favoritesEvents" id="{{favorite.category}}">{{favorite.name}}</a>
-       </div>
+      <a ng-href="#" class="list-group-item" ng-repeat="favorite in likeList.favoritesEvents" id="{{favorite.category}}">{{favorite.name}}</a>
+      </div>    
     </div>
-  <script src="js/lib/angular/angular.min.js"></script>
-  <script src="js/favorites.js"></script>
+          <script src="js/lib/angular/angular.min.js"></script>
+          <script src="js/favorites.js"></script>
 </body>
 </html>

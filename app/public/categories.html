@@ -1,20 +1,24 @@
 <!DOCTYPE html>
 <html ng-app="circleApp">
-  <head>
-      <title>Cicle app</title>
-      <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-      <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-      <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
-      <link rel="stylesheet" href="css/style.css" >
-  </head>
-  <body ng-controller="myCtrl">
-      <div class="list-group" >
-         <section class="list-group-item" id="logo">
-             <a href="index.html"><button type="button" class="btn btn-default" id="home"><span class="glyphicon glyphicon-home"></span></button></a>
-         </section>
-        <a ng-href="http://shenkar.html5-book.co.il/2015-2016/ws1/dev_189/category.html?cat={{category.name}}" class="list-group-item" ng-repeat="category in circle.categories" style="color:{{category.color}};background-image:url(images/{{category.url}});">{{category.name}}</a>
-      </div>
-      <script src="js/lib/angular/angular.min.js"></script>
-      <script src="js/categories.js"></script>
-  </body>
+<head>
+    <title>Cicle app</title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="css/style.css" >
+</head>
+<body ng-controller="myCtrl">
+    <div class="list-group" >
+       <section class="list-group-item" id="logo">
+       <div class="colorImgFavo"></div>
+           <a href="index.html"><button type="button" class="btn btn-default" id="home">
+           <span class="glyphicon glyphicon-home"></span>
+           </button></a>
+       </section>
+       <section id="categoriesPosi">
+      <a ng-href="http://shenkar.html5-book.co.il/2015-2016/ws1/dev_189/category.html?cat={{category.name}}" class="list-group-item" ng-repeat="category in circle.categories" style="color:{{category.color}};background-image:url(images/{{category.url}});">{{category.name}}</a>
+    </div>
+          <script src="js/lib/angular/angular.min.js"></script>
+          <script src="js/categories.js"></script>
+</body>
 </html>

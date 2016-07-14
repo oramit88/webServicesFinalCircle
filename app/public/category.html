@@ -8,8 +8,9 @@
         <link rel="stylesheet" href="css/style.css" >
      </head>
      
-     <body ng-controller="myEvent" >
+     <body ng-controller="myEvent" id="categoryImg" style="background-image:url(images/{{events.eventsList[index].url}});">
              <section class="list-group-item" id="logo">
+             <div class="colorImgFavo"></div>
              <a href="index.html"><button type="button" class="btn btn-default" id="home">
              <span class="glyphicon glyphicon-home"></span>
              </button></a>
@@ -18,10 +19,12 @@
               <h1 class="display-3">{{events.eventsList[index].name}}<img id="myImage" src="images/unlike.png" ng-click="changeImage()"></h1>
               <p><a href="#" id="description" class="lead">{{events.eventsList[index].short_description}}</a></p>
               <hr class="m-y-2">
-              <p class="posi"><span class="glyphicon glyphicon-map-marker"></span>{{events.eventsList[index].distance}}<span class="posi2">{{events.eventsList[index].category}}</span>&#8362;{{events.eventsList[index].price}}</p>
-              <p class="lead">
-              <button type="button" class="btn btn-default" ng-click="goBackEvent()"> < </button>
+              <section id="iconPosi">
+              <p class="posi"><span class="glyphicon glyphicon-map-marker"></span><span>{{events.eventsList[index].distance}}</span><span class="posi2">{{events.eventsList[index].category}}</span>&#8362;<span>{{events.eventsList[index].price}}</span></p>
+              </section>
+              <p class="lead" id="goButn">
               <button type="button" class="btn btn-default" ng-click="goNextEvent()"> > </button>
+              <button type="button"  class="btn btn-default" ng-click="goBackEvent()"> < </button>
               </p>
     <!--       <nav class="navbar navbar-inverse">
           <p><a href="#" class="navbar-link">TODAY</a></p>

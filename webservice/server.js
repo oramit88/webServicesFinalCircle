@@ -45,6 +45,14 @@ app.get('/getEvantsThatUserInvaitedTo/:userMail',eventsModuleController.getEvant
 //DIMA SAIS IN ORDER TO DO WITH 2 PARAMETER .../:arg1/:arg2
 //SEE YONITS POWERPOINT
 app.get('/getEvantsThatUserInvited/:userMail',eventsModuleController.getEvantsThatUserInvited);
+//EXAMPLE- http://localhost:3000/isUserExist/oramitD88@gmail.com
+app.get('/isUserExist/:userMail',eventsModuleController.isUserExist);
+
+
+//EXAMPLE - http://localhost:3000/inviteUserToEvent?fromUser=oramit88@gmail.com&toUser=luiza.martinez@gmail.com&evantID=20
+app.get('/inviteUserToEvent',eventsModuleController.inviteUserToEvent);
+
+
 
 
 app.listen(port);

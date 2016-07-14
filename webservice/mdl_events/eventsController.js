@@ -174,7 +174,6 @@ exports.findEventsByTimeAndPrice=function(req,res){
             else{
                 console.log("RESULT  IS:\n" +doc);
                 res.json(doc);
-           
             }
         });
  }
@@ -246,8 +245,8 @@ exports.findEventsByTimeAndPrice=function(req,res){
             }
             else{
                 //console.log("RESULT emails IS:\n" +doc[0].invited_to);
-                var numOfEvents= doc[0].invited_events;
-                //console.log("number of events is: "+ numOfEvents);
+                var numOfEvents= doc[0].invited_events.length;
+                console.log("number of events is: "+ numOfEvents);
                 var eventName;
                 var intEventId;
 
@@ -284,10 +283,10 @@ exports.findEventsByTimeAndPrice=function(req,res){
 
 exports.isUserExist=function(req,res){
         var userMail = req.params.userMail; //will change after g+ implementation.
-        console.log("test: in EventsController- getEventsByUser function");
+        console.log("test: in isUserExist-  function");
         //console.log("test my user is: "+CurrentUserEmail);
         //finding the current user in users collection and searching the events in events collection.
-        var query=userModel.find().where('email',CurrentUserEmail);
+        var query=userModel.find().where('email',userMail);
         query.exec(function(err,doc){
             console.log("searching user events");
             if(err){
@@ -295,13 +294,61 @@ exports.isUserExist=function(req,res){
                 throw err;
             }
             else{
-                console.log("the ivents is:\n" +doc[0].like);
+                if(doc[0]!=undefined){
+                    console.log("the result is:\n" +doc[0].id);
+                    returnMsg={"isExist":"TRUE"}
+                    res.json(returnMsg);
+                }
+                else{
+                    console.log("Didnf find user");  
+                    returnMsg={"isExist":"FALSE"}
+                    res.json(returnMsg);
+                }
                 //var numberOfEvents=doc[0].like.length;
-                var LikeEventsArray=doc[0].like;
-                eventModel.find({'id':{$in:LikeEventsArray}}).exec(function(err,docs){
-                    res.json(docs);
-                })
-                //res.json(doc);
             }
         });
+ }
+
+
+ exports.inviteUserToEvent=function(req,res){
+        console.log("test: in inviteUserToEvent function");
+        var urlPart=url.parse(req.url,true);
+        var query=urlPart.query;
+        var fromUser=query.fromUser;
+        var toUser=query.toUser;
+        var eventId=query.evantID;
+        console.log("fromUser is: " +fromUser+" toUser is: "+toUser+ " evantID is "+eventId);
+        //updating the "from" user document
+        myFromJson= {"event_id": eventId,
+            "friend_email": toUser,
+            "status": "waiting"}
+        var query= userModel.update({email: fromUser},{
+            $addToSet:{invited_events:myFromJson}
+        });
+        query.exec(function(err,results){
+            if(err){
+                console.log("err is:"+err);
+            }
+            else{
+                console.log("\n finishing Update doc: "+fromUser+"with: "+myFromJson);
+            }
+        });
+
+        //updating the "to" user document
+        myToJson= {"event_id": eventId,
+            "status": "waiting",
+            "invited_by": fromUser}
+        var query2= userModel.update({email: toUser},{
+            $addToSet:{invited_to:myToJson}
+        });
+        query2.exec(function(err,results){
+            if(err){
+                console.log("err is:"+err);
+            }
+            else{
+                console.log("\n finishing Update doc: "+toUser+"with: "+myToJson);
+            }
+        });
+
+
  }

@@ -144,6 +144,14 @@ button.list-group-item{
   right: 340px;
 }
 
+.ignOut{
+  color: #FFF;
+  float: right;
+  margin:10px;
+  font-weight: bold;
+  font-size: 40px; 
+}
+
 #test div{
   width: 290px;
 }

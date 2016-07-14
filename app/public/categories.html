@@ -16,10 +16,10 @@
            </button></a>
        </section>
        <section id="categoriesPosi">
-      <a ng-href="http://shenkar.html5-book.co.il/2015-2016/ws1/dev_189/category.html?cat={{category.name}}" class="list-group-item" ng-repeat="category in circle.categories" style="color:{{category.color}};background-image:url(images/{{category.url}});">{{category.name}}</a>
+      <a ng-href="http://localhost:8080/category.html?cat={{category.name}}&currentUser={{circle.currentUser}}" class="list-group-item" ng-repeat="category in circle.categories" style="color:{{category.color}};background-image:url(images/{{category.url}});">{{category.name}}</a>
     </div>
-          <script src="js/lib/angular/angular.min.js"></script>
-          <script src="js/categories.js"></script>
+    <script src="js/lib/angular/angular.min.js"></script>
+    <script src="js/categories.js"></script>
 </body>
 </html>
 

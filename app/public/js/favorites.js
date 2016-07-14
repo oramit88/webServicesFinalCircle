@@ -1,5 +1,8 @@
 var favoritesApp = angular.module('favoritesApp',[]);
-
+var pageUrl = window.location.search.substring(1).split("&");
+//parsing the category name from the page url path.
+var currentUser = pageUrl[0].split("=")[1];
+console.log("curr user is: "+currentUser);
 
  var model = {
         
@@ -7,7 +10,7 @@ var favoritesApp = angular.module('favoritesApp',[]);
 
  favoritesApp.run(function($http){
      console.log("test2");
-    $http.get("https://circlews.herokuapp.com/getEventsByUser").success(function(data){
+    $http.get("http://localhost:3000/getEventsByUser/"+currentUser).success(function(data){
      console.log(data);
       model.favoritesEvents = data;
     });

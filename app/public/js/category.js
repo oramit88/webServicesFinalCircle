@@ -2,7 +2,9 @@ var categoryApp = angular.module('categoryApp',[]);
 var pageUrl = window.location.search.substring(1).split("&");
 //parsing the category name from the page url path.
 var catId = pageUrl[0].split("=")[1];
+var CurrentUser=pageUrl[1].split("=")[1];
 console.log("cat id is:"+catId);
+console.log("user is:"+CurrentUser);
 
 var model = {
      index: 0   

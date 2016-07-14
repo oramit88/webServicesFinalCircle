@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="mainMenu">>
 <head>
     <title>Circle app</title>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
@@ -8,15 +8,18 @@
     <link rel="stylesheet" href="css/style.css" >
 </head>
 <body id="optionsMenu">
-    <div class="list-group">
+    <div class="list-group" ng-controller="myMenu">
       <a href="index.html" class="ignOut" onclick="signOut();">Sign out</a>
-      <a href="favorites.html"><button type="button" class="list-group-item">FAVORITES</button></a>
-      <a href="friends.html"><button type="button" class="list-group-item">FRIENDS</button></a>
-      <a href="booking.html"><button type="button" class="list-group-item">BOOKING</button></a>
-      <a href="categories.html"><button type="button" class="list-group-item">CATEGORIES</button></a>
+      <a href="favorites.html?user={{currUser.currentUser}}"><button type="button" class="list-group-item">FAVORITES</button></a>
+      <a href="friends.html?user={{currUser.currentUser}}"><button type="button" class="list-group-item">FRIENDS</button></a>
+      <a href="booking.html?user={{currUser.currentUser}}"><button type="button" class="list-group-item">BOOKING</button></a>
+      <a href="categories.html?user={{currUser.currentUser}}"><button type="button" class="list-group-item">CATEGORIES</button></a>
+     
       <div class="colorImg"></div>
       <div id="bottomBar"><div id="logo2"></div></div>
     </div>
-    <script src="js/login.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+     <script src="js/lib/angular/angular.min.js"></script>
+     <script src="js/mainmenu.js"></script>
 </body>
 </html>

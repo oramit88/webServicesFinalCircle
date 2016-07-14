@@ -1,7 +1,13 @@
- var circleApp = angular.module('circleApp',[]);
+var pageUrl = window.location.search.substring(1).split("&");
+//parsing the category name from the page url path.
+var currentUser = pageUrl[0].split("=")[1];
+console.log("current user is:"+currentUser);
+
+
+var circleApp = angular.module('circleApp',[]);
 
 var model = {
-        
+    currentUser
  };
 
 circleApp.run(function($http){
@@ -13,4 +19,5 @@ circleApp.run(function($http){
 
 circleApp.controller('myCtrl', function ($scope) {
   $scope.circle = model;
+
 });

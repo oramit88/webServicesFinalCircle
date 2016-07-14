@@ -29,7 +29,7 @@ app.get('/getAllUsers',eventsModuleController.getAllUsers);
 app.get('/setLikeToEvent/:eventId',eventsModuleController.setLikeToEvent);
 app.get('/setUnLikeToEvent/:eventId',eventsModuleController.setUnLikeToEvent);
 //need to change getLikeEventsByUser
-app.get('/getEventsByUser',eventsModuleController.getEventsByUser);
+app.get('/getEventsByUser/:userMail',eventsModuleController.getEventsByUser);
 app.get('/getFriendsByUserMail/:userMail',eventsModuleController.getFriendsByUserMail);
 
 

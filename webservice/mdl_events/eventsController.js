@@ -107,8 +107,9 @@ exports.getAllUsers=function(req,res){
 
 //returns current logedIn user events
 exports.getEventsByUser=function(req,res){
-        var CurrentUserEmail="oramit88@gmail.com"; //will change after g+ implementation.
-        console.log("test: in EventsController- getEventsByUser function");
+        var CurrentUserEmail = req.params.userMail;
+        //var CurrentUserEmail="oramit88@gmail.com"; //will change after g+ implementation.
+        console.log("test: in EventsController- getEventsByUser function. user is:"+CurrentUserEmail);
         //console.log("test my user is: "+CurrentUserEmail);
         //finding the current user in users collection and searching the events in events collection.
         var query=userModel.find().where('email',CurrentUserEmail);

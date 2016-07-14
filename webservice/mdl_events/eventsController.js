@@ -157,6 +157,27 @@ exports.getEventsByUser=function(req,res){
         });
  }
 
+exports.findEventsByTimeAndPrice=function(req,res){
+        console.log("test: in findEventsByTimeAndPrice- findEventsByTimeAndPrice function");
+        var urlPart=url.parse(req.url,true);
+        var query=urlPart.query;
+        var searchTime=query.time;
+        var searchPrice=query.price;
+        //console.log("the time is: " +time+" the price is: "+price);
+
+        eventModel.find({time:searchTime}).where('price').lte(searchPrice).exec(function(err,doc){
+            console.log("searching...");
+            if(err){
+                console.log("error is:"+err);
+                throw err;
+            }
+            else{
+                console.log("RESULT  IS:\n" +doc);
+                res.json(doc);
+           
+            }
+        });
+ }
 
 //working!
 //EXAMPLE - http://localhost:3000/getEvantsThatUserInvaitedTo/oramit88@gmail.com
@@ -207,24 +228,80 @@ exports.getEventsByUser=function(req,res){
         });
  }
 
-exports.findEventsByTimeAndPrice=function(req,res){
-        console.log("test: in findEventsByTimeAndPrice- findEventsByTimeAndPrice function");
-        var urlPart=url.parse(req.url,true);
-        var query=urlPart.query;
-        var searchTime=query.time;
-        var searchPrice=query.price;
-        //console.log("the time is: " +time+" the price is: "+price);
+ 
 
-        eventModel.find({time:searchTime}).where('price').lte(searchPrice).exec(function(err,doc){
+
+
+
+ exports.getEvantsThatUserInvited=function(req,res){
+        console.log("test:  getEvantsThatUserInvaitedTo function");
+        var userMail = req.params.userMail;
+        console.log("test: User mail is: "+userMail);
+        var query=userModel.find().where('email',userMail); //finding the current user
+        query.exec(function(err,doc){
             console.log("searching...");
             if(err){
                 console.log("error is:"+err);
                 throw err;
             }
             else{
-                console.log("RESULT  IS:\n" +doc);
-                res.json(doc);
-           
+                //console.log("RESULT emails IS:\n" +doc[0].invited_to);
+                var numOfEvents= doc[0].invited_events;
+                //console.log("number of events is: "+ numOfEvents);
+                var eventName;
+                var intEventId;
+
+                var eventsIdsArray=[];
+                for(var i = 0 ; i < numOfEvents; i++){
+                    intEventId=parseInt(doc[0].invited_events[i].event_id);
+                    //console.log("events Id is: "+ intEventId);
+                     eventsIdsArray.push(intEventId);
+                }
+                console.log("eventsIdsArray"+ eventsIdsArray);
+              
+                eventModel.find({'id':{$in:eventsIdsArray}}).sort("id").exec(function(err,docs){ 
+                    var  eventsArray=[];
+                    console.log("see status?");
+                    //console.log(doc[0].invited_events[0].status);
+                    docsAmounth=docs.length;
+                    console.log("size is"+docsAmounth);
+                    for(var i=0; i<docsAmounth;i++){ 
+                        var convertedJSON = JSON.parse(JSON.stringify(docs[i]));
+                        convertedJSON.status=doc[0].invited_events[i].status; //adding "status" field
+                        convertedJSON.friend_email=doc[0].invited_events[i].friend_email; //adding "invited_by" field
+                        eventsArray.push(convertedJSON);
+                        //console.log("arr is "+ eventsIdsArray);
+                        //console.log("docs is \n");
+                    }
+                     res.json(eventsArray);    
+                })
+
+            }
+        });
+ }
+
+
+
+exports.isUserExist=function(req,res){
+        var userMail = req.params.userMail; //will change after g+ implementation.
+        console.log("test: in EventsController- getEventsByUser function");
+        //console.log("test my user is: "+CurrentUserEmail);
+        //finding the current user in users collection and searching the events in events collection.
+        var query=userModel.find().where('email',CurrentUserEmail);
+        query.exec(function(err,doc){
+            console.log("searching user events");
+            if(err){
+                console.log("error is:"+err);
+                throw err;
+            }
+            else{
+                console.log("the ivents is:\n" +doc[0].like);
+                //var numberOfEvents=doc[0].like.length;
+                var LikeEventsArray=doc[0].like;
+                eventModel.find({'id':{$in:LikeEventsArray}}).exec(function(err,docs){
+                    res.json(docs);
+                })
+                //res.json(doc);
             }
         });
  }

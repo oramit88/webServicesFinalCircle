@@ -32,17 +32,19 @@ app.get('/setUnLikeToEvent/:eventId',eventsModuleController.setUnLikeToEvent);
 app.get('/getEventsByUser',eventsModuleController.getEventsByUser);
 app.get('/getFriendsByUserMail/:userMail',eventsModuleController.getFriendsByUserMail);
 
-//working!
-//localhost:3000/getEvantsThatUserInvaitedTo/oramit88@gmail.com
-
-
-app.get('/getEvantsThatUserInvaitedTo/:userMail',eventsModuleController.getEvantsThatUserInvaitedTo);
-
 
 //EXAMPLE - http://localhost:3000/findEventsByTimeAndPrice?time=23:00&price=80
 app.get('/findEventsByTimeAndPrice',eventsModuleController.findEventsByTimeAndPrice);
 
 
+//working!
+//localhost:3000/getEvantsThatUserInvaitedTo/oramit88@gmail.com
+app.get('/getEvantsThatUserInvaitedTo/:userMail',eventsModuleController.getEvantsThatUserInvaitedTo);
+
+//THE USER SEND INVITATION TO SOMEONE
+//DIMA SAIS IN ORDER TO DO WITH 2 PARAMETER .../:arg1/:arg2
+//SEE YONITS POWERPOINT
+app.get('/getEvantsThatUserInvited/:userMail',eventsModuleController.getEvantsThatUserInvited);
 
 
 app.listen(port);

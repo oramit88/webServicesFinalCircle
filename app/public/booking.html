@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="css/style.css" >
 </head>
-<body id="test">
+<body id="bookingsColor">
     <div class="list-group" id="font" >
        <section class="list-group-item" id="logo">
        <div class="colorImgFavo"></div>
@@ -22,7 +22,6 @@
 
       <div id="favoriteColor2" ng-controller="myCtrl2">
       <h1>Events That I invaited:</h1>
-      <img src= "../images/circle_blue.png">
       <a ng-href="#" class="list-group-item" ng-repeat="events in invaitedList.invaitedHistory"><span class="{{events.status}}"><p class="nameSize">{{events.name}}</p></span>{{events.friend_email}}</a>
       </div>
       </div>

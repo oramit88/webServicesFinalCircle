@@ -55,3 +55,12 @@ categoryApp.controller("myEvent", function($scope,$http) {
     }   
 });
 
+function hidefunc(){
+    document.getElementById("primeryPage").style.visibility = "hidden";
+    document.getElementById("longDescription").style.visibility = "visible";
+}
+
+function hideLongDescription(){
+    document.getElementById("primeryPage").style.visibility = "visible";
+    document.getElementById("longDescription").style.visibility = "hidden";
+}

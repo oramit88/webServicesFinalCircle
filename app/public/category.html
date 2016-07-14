@@ -9,6 +9,7 @@
      </head>
      
      <body ng-controller="myEvent" id="categoryImg" style="background-image:url(images/{{events.eventsList[index].url}});">
+        <div id="primeryPage">
              <section class="list-group-item" id="logo">
              <div class="colorImgFavo"></div>
              <a href="mainmenu.html"><button type="button" class="btn btn-default" id="home">
@@ -16,8 +17,8 @@
              </button></a>
            </section>
         <div class="jumbotron">
-              <h1 class="display-3">{{events.eventsList[index].name}}<img id="myImage" src="images/unlike.png" ng-click="changeImage()"></h1>
-              <p><a href="#" id="description" class="lead">{{events.eventsList[index].short_description}}</a></p>
+              <h1 class="display-3">{{events.eventsList[index].name}}<img id="myImage" src="../images/unlike.png" ng-click="changeImage()"></h1>
+              <p><a href="#" id="description" class="lead" onclick="hidefunc()">{{events.eventsList[index].short_description}}</a></p>
               <hr class="m-y-2">
               <section id="iconPosi">
               <p class="posi"><span class="glyphicon glyphicon-map-marker"></span><span>{{events.eventsList[index].distance}}</span><span class="posi2">{{events.eventsList[index].category}}</span>&#8362;<span>{{events.eventsList[index].price}}</span></p>
@@ -27,6 +28,12 @@
               <button type="button"  class="btn btn-default" ng-click="goBackEvent()"> < </button>
               </p>
         </div>
+      </div>
+
+      <div id="longDescription" class="jumbotron" onclick="hideLongDescription()">
+            <h1 class="display-3">{{events.eventsList[index].name}}</h1>
+            <p class="descriptionFont"> {{events.eventsList[index].long_description}}</p>
+      </div>
 <!--         <div id="searchMenu">
           <p><button type="button" class="list-group-item"> href="#">TODAY</button></p>
         </div> -->

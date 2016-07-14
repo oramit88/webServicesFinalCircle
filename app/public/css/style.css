@@ -325,7 +325,7 @@ margin-left: 70px;
   font-size: 50px;
 }
 
-/*a.navbar-link{
+a.navbar-link{
   text-decoration:none;
   bottom: 0;
   position: fixed;
@@ -335,13 +335,21 @@ margin-left: 70px;
 }
 
 #searchMenu{
+  background-image: url("../images/footer.png");
   width: 100%;
-  height: 150px;
-   bottom: 50px;
+  height: 250px;
+  bottom: 0;
   position:fixed;
-  background-color: red;
   margin: 0 auto;
-}*/
+}
+
+button.btn-secondary{
+  font-size: 60px;
+  position: absolute;
+  margin-left: 380px;
+  margin-top: 70px;
+  background-color: #000; 
+}
 }
 
 

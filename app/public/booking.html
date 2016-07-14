@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html ng-app="historyApp">
+<head>
+    <title>Circle app</title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="css/style.css" >
+</head>
+<body id="test">
+    <div class="list-group" id="font" >
+       <section class="list-group-item" id="logo">
+       <div class="colorImgFavo"></div>
+         <a href="mainmenu.html"><button type="button" class="btn btn-default" id="home">
+          <span class="glyphicon glyphicon-home"></span>
+          </button></a>
+       </section>
+       <div id="favoriteColor" ng-controller="myCtrl">
+       <h1>Events That I was invaited to:</h1>
+      <a ng-href="#" class="list-group-item" ng-repeat="event in historyList.myHistory"><span class="{{event.status}}"><p class="nameSize">{{event.name}}</p></span> By {{event.invited_by}} </a>
+      </div>
+
+      <div id="favoriteColor2" ng-controller="myCtrl2">
+      <h1>Events That I invaited:</h1>
+      <img src= "../images/circle_blue.png">
+      <a ng-href="#" class="list-group-item" ng-repeat="events in invaitedList.invaitedHistory"><span class="{{events.status}}"><p class="nameSize">{{events.name}}</p></span>{{events.friend_email}}</a>
+      </div>
+      </div>
+          <script src="js/lib/angular/angular.min.js"></script>
+          <script src="js/booking.js"></script>
+</body>
+</html>

@@ -216,10 +216,50 @@ h1.display-3{
   display: block;
 }
 
+#favoriteColor h1{
+  font-size: 58px;
+  background-color: #252425;
+  color: #FFF;
+
+}
 #favoriteColor a{
   background: #575755;
 }
 
+#favoriteColor2 a{
+  background: #575755;
+}
+
+#favoriteColor2 h1{
+  font-size: 58px;
+  background-color: #252425;
+  color: #FFF;
+}
+
+#test{
+  background-color: #252425;
+}
+
+#favoriteColor a.list-group-item{
+  font-size: 35px;
+  height: auto;
+  background-color: #839397;
+  color:#000;
+  text-align: left;
+}
+
+#favoriteColor2 a.list-group-item{
+  font-size: 35px;
+  height: auto;
+  color:#000;
+  background-color: #839397;
+  text-align: left;
+}
+
+.nameSize{
+font-size: 50px;
+margin-left: 70px;
+}
 #ALL{
   color: #ffffff;
 }
@@ -255,6 +295,32 @@ h1.display-3{
 #ATTRACTIONS{
   color: #fffca3;
 }
+
+.waiting{
+  background-image: url(../images/waiting.png);
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 60px;
+  display: block;
+}
+
+.going{
+  background-image: url(../images/going.png);
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 60px;
+  display: block;
+}
+
+.rejected{
+  background-image: url(../images/rejected.png);
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 60px;
+  display: block;
+}
+
+
 
 /*a.navbar-link{
   text-decoration:none;

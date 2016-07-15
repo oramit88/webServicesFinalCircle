@@ -12,7 +12,7 @@
         <div id="primeryPage">
               <section class="list-group-item" id="logo">
                   <div class="colorImgFavo"></div>
-                  <a href="mainmenu.html"><button type="button" class="btn btn-default" id="home"> <span class="glyphicon glyphicon-home"></span></button></a>
+                  <a href="mainmenu.html?user={{currUser.currentUser}}"><button type="button" class="btn btn-default" id="home"> <span class="glyphicon glyphicon-home"></span></button></a>
               </section>
               <div class="jumbotron">
                   <h1 class="display-3">{{events.eventsList[index].name}}<img id="myImage" src="../images/unlike.png" ng-click="changeImage()"></h1>

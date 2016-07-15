@@ -5,7 +5,7 @@ console.log("curr user is: "+currentUser);
 var friendsApp = angular.module('friendsApp',[]);
 
  var model = {
-
+      currentUser
   };
 
  friendsApp.run(function($http){

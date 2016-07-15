@@ -43,7 +43,7 @@ categoryApp.controller("myEvent", function($scope,$http) {
     };
 
     $scope.goBackPrice=function(){
-             $scope.price=$scope.price + '30';
+             $scope.price=$scope.price - 50;
              if($scope.price==50){
              $scope.price=200;
              }

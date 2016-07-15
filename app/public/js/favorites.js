@@ -5,7 +5,7 @@ var currentUser = pageUrl[0].split("=")[1];
 console.log("curr user is: "+currentUser);
 
  var model = {
-        
+     currentUser   
   };
 
  favoritesApp.run(function($http){

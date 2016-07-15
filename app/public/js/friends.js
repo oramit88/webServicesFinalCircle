@@ -1,12 +1,12 @@
 var pageUrl = window.location.search.substring(1).split("&");
 //parsing the category name from the page url path.
 var currentUser = pageUrl[0].split("=")[1];
-console.log("curr user is: "+currentUser);
+//console.log("curr user is: "+currentUser);
 var friendsApp = angular.module('friendsApp',[]);
 
- var model = {
+var model = {
       currentUser
-  };
+};
 
  friendsApp.run(function($http){
      console.log("test2");
@@ -18,4 +18,5 @@ var friendsApp = angular.module('friendsApp',[]);
 
  friendsApp.controller('myCtrl', function ($scope) {
    $scope.friendList = model;
+   //console.log("curr user is2:"+friendList.currentUser);
  });

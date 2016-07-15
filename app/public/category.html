@@ -33,8 +33,59 @@
               <p class="descriptionFont"> {{events.eventsList[index].long_description}}</p>
       </div>
       <div id="searchMenu">
-          <button type="button" class="btn btn-secondary">TODAY</button>
+          <button type="button" class="btn btn-secondary" onclick="hideEvent()">TODAY</button>
       </div>
+      <div id="openedSearch">
+        <section class="searchLine">
+            <table class="table">
+            <thead>
+            <tr>
+            <td><button type="button"  class="btn btn-primary btn-lg" ng-click="goBackPrice()"> < </button></td>
+            <td>{{price-100}}</td>
+            <td>{{price-50}}</td>
+            <td>{{price}}</td>
+            <td>{{price+50}}</td>
+            <td>{{price+100}}</td>
+            <td>{{price+150}}</td>
+            <td><button type="button" class="btn btn-primary btn-lg" ng-click="goNextPrice()"> > </button></td>
+           </tr>
+          </thead>
+          </table>
+        </section>
+        <section class="searchLine">
+            <table class="table">
+            <thead>
+            <tr>
+            <td><button type="button"  class="btn btn-primary btn-lg" ng-click="goBackSearch()"> < </button></td>
+            <td>10</td>
+            <td>20</td>
+            <td>30</td>
+            <td>40</td>
+            <td>50</td>
+            <td>60</td>
+            <td><button type="button" class="btn btn-primary btn-lg" ng-click="goNextSearch()"> > </button></td>
+           </tr>
+          </thead>
+          </table>
+        </section>
+        <section class="searchLine">
+           <table class="table">
+            <thead>
+            <tr>
+            <td><button type="button"  class="btn btn-primary btn-lg" ng-click="goBackSearch()"> < </button></td>
+            <td>10</td>
+            <td>20</td>
+            <td>30</td>
+            <td>40</td>
+            <td>50</td>
+            <td>60</td>
+            <td><button type="button" class="btn btn-primary btn-lg" ng-click="goNextSearch()"> > </button></td>
+           </tr>
+          </thead>
+          </table>
+        </section>
+      </div>
+
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
       <script src="js/lib/angular/angular.min.js"></script>
       <script src="js/category.js"></script>

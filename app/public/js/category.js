@@ -7,7 +7,7 @@ console.log("cat id is:"+catId);
 console.log("user is:"+CurrentUser);
 
 var model = {
-     index: 0   
+     index: 0,  
  };
 var numOfEvents;
 
@@ -25,6 +25,22 @@ categoryApp.run(function($http){
 categoryApp.controller("myEvent", function($scope,$http) {
     $scope.events = model;
     $scope.index = 0;
+    $scope.price = 200;
+
+    $scope.goBackPrice=function(){
+             $scope.price=$scope.price-50;
+             if($scope.price<0){
+             $scope.price=10;
+             }
+            //$scope.todo.items.push({action:actionText, done:false});
+    };
+    $scope.goNextPrice=function(){
+             $scope.price=$scope.price+50;
+             if($scope.price==350){
+                $scope.price=0;
+             }
+            //$scope.todo.items.push({action:actionText, done:false});
+    };
     $scope.goNextEvent=function(){
             var image = document.getElementById('myImage');
             image.src = "images/unlike.png";
@@ -65,4 +81,14 @@ function hidefunc(){
 function hideLongDescription(){
     document.getElementById("primeryPage").style.visibility = "visible";
     document.getElementById("longDescription").style.visibility = "hidden";
+}
+
+function hideEvent(){
+    document.getElementById("primeryPage").style.visibility = "hidden";
+    document.getElementById("openedSearch").style.visibility = "visible";
+}
+
+function hideSearch(){
+    document.getElementById("primeryPage").style.visibility = "visible";
+    document.getElementById("openedSearch").style.visibility = "hidden";
 }

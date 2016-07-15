@@ -350,6 +350,22 @@ button.btn-secondary{
   margin-top: 70px;
   background-color: #000; 
 }
+
+#openedSearch{
+  visibility: hidden;
+  opacity: 0.8;
+}
+
+section.searchLine{
+  background-color: #000;
+  width: 100%;
+  height: 200px;
+  top: 610px;
+  position: relative;
+  font-size: 55px;
+}
+
+
 }
 
 

@@ -353,3 +353,44 @@ exports.isUserExist=function(req,res){
 
 
  }
+
+
+
+
+
+ exports.isUserLikeEvent=function(req,res){
+        console.log("test: in isUserLikeEvent function");
+        var isUserLikeEvent=false;
+        var urlPart=url.parse(req.url,true);
+        var query=urlPart.query;
+        var user=query.user;
+        var evantId=query.evantId;
+        console.log("User is: " +user+" Event ID is: "+evantId);
+        var query=userModel.find().where('email',user);
+        query.exec(function(err,doc){
+            console.log("searching user events");
+            if(err){
+                console.log("error is:"+err);
+                throw err;
+            }
+            else{
+                var likeArrLength=doc[0].like.length;
+                for(i=0;i<likeArrLength;i++){
+                    if(doc[0].like[i]==evantId){
+                       isUserLikeEvent=true; 
+                    }
+                }
+                console.log("likeArrLength is:"+likeArrLength);
+                console.log("Bool result is:"+isUserLikeEvent);
+                if(isUserLikeEvent==true){
+                    returnMsg={"isUserLikeEvent":"TRUE"}
+                    res.json(returnMsg);
+                }
+                else{
+                    returnMsg={"isUserLikeEvent":"FALSE"}
+                    res.json(returnMsg);
+                }
+
+            }
+        });
+ }

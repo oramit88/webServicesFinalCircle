@@ -48,9 +48,11 @@ app.get('/getEvantsThatUserInvited/:userMail',eventsModuleController.getEvantsTh
 //EXAMPLE- http://localhost:3000/isUserExist/oramitD88@gmail.com
 app.get('/isUserExist/:userMail',eventsModuleController.isUserExist);
 
-
 //EXAMPLE - http://localhost:3000/inviteUserToEvent?fromUser=oramit88@gmail.com&toUser=luiza.martinez@gmail.com&evantID=20
 app.get('/inviteUserToEvent',eventsModuleController.inviteUserToEvent);
+
+//EXAMPLE - http://localhost:3000/isUserLikeEvent?user=oramit88@gmail.com&evantId=20
+app.get('/isUserLikeEvent',eventsModuleController.isUserLikeEvent);
 
 
 

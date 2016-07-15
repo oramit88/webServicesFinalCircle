@@ -26,9 +26,19 @@ categoryApp.controller("myEvent", function($scope,$http) {
     $scope.events = model;
     $scope.index = 0;
     $scope.price = 200;
+    $scope.time = 21;
+
+    $scope.goBackTime=function(){
+             $scope.time=$scope.time-1;
+             console.log($scope.time);
+             if($scope.time==0){
+             $scope.time=23;
+             }
+            //$scope.todo.items.push({action:actionText, done:false});
+    };
 
     $scope.goBackPrice=function(){
-             $scope.price=$scope.price-50;
+             $scope.price=$scope.price + '30';
              if($scope.price==50){
              $scope.price=200;
              }

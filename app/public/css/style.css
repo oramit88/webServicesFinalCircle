@@ -365,9 +365,22 @@ section.searchLine{
   font-size: 55px;
 }
 
+
+
 .test{
   background-color: gray;
 }
+
+.searchBarTitles{
+   font-size: 55px;
+   color:red;
+   margin: 0 auto;
+     text-align: center;
+
+}
+
+
+
 
 }
 

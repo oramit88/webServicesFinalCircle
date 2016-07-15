@@ -164,19 +164,54 @@ exports.findEventsByTimeAndPrice=function(req,res){
         var query=urlPart.query;
         var searchTime=query.time;
         var searchPrice=query.price;
-        //console.log("the time is: " +time+" the price is: "+price);
+        var categ=query.cat;
 
-        eventModel.find({time:searchTime}).where('price').lte(searchPrice).exec(function(err,doc){
-            console.log("searching...");
-            if(err){
-                console.log("error is:"+err);
-                throw err;
-            }
-            else{
-                console.log("RESULT  IS:\n" +doc);
-                res.json(doc);
-            }
-        });
+        console.log("the time is: " +searchTime+" the price is: "+searchPrice +"category is: "+categ);
+
+        if(categ=="ALL"){
+            eventModel.find({time:searchTime}).where('price').lte(searchPrice).exec(function(err,doc){
+                console.log("searching...");
+                if(err){
+                    console.log("error is:"+err);
+                    throw err;
+                }
+                else{
+                    console.log("RESULT  IS:\n" +doc);
+                    if(doc[0]==undefined){
+                        console.log("didnt find nothing!!");
+                        returnMsg={"res":"Didnt find nothing"}
+                         res.json(returnMsg);
+                    }
+                    else{ //succsesfull result
+                        res.json(doc);
+                    }
+
+                    
+                }
+             });
+        }
+        else{
+            eventModel.find({time:searchTime,category:categ}).where('price').lte(searchPrice).exec(function(err,doc){
+                console.log("searching...");
+                if(err){
+                    console.log("error is:"+err);
+                    throw err;
+                }
+                else{
+                    console.log("RESULT  IS:\n" +doc);
+                    if(doc[0]==undefined){
+                        console.log("didnt find nothing!!");
+                        returnMsg={"res":"Didnt find nothing"}
+                         res.json(returnMsg);
+                    }
+                    else{ //succsesfull result
+                        res.json(doc);
+                    }
+
+                    
+                }
+             });
+        }       
  }
 
 //working!

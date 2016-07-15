@@ -1,57 +1,96 @@
 var categoryApp = angular.module('categoryApp',[]);
+//var profile = googleUser.getBasicProfile();
+//console.log('Email is: ' + profile.getEmail());
 var pageUrl = window.location.search.substring(1).split("&");
 //parsing the category name from the page url path.
 var catId = pageUrl[0].split("=")[1];
 var CurrentUser=pageUrl[1].split("=")[1];
 console.log("cat id is:"+catId);
-console.log("user is:"+CurrentUser);
+
+
 
 var model = {
      index: 0,  
+     CurrentUser
  };
 var numOfEvents;
-
+    console.log("user is:"+model.CurrentUser);
 categoryApp.run(function($http){
+    if(catId=="ALL")
+    {
+        console.log("bring all events from DB");
+        $http.get("https://circlews.herokuapp.com/getAllEvents/").success(function(data){
+            console.log("getting eventts from server..."); 
+            model.eventsList=data;
+            numOfEvents=data.length;
+            console.log(data);
+        });
+
+    }
+    else{ //thre is a categories
+        $http.get("https://circlews.herokuapp.com/getEventsByCategory/"+catId).success(function(data){
+            console.log("getting eventts from server..."); 
+
+
+             if(data.length==0){
+                    console.log("didnt find nothing in the search");
+                    var didntFindEventJson=[{name:"Didn't find nothing",short_description:"Please go back"}];
+                    numOfEvents=1;
+                    model.eventsList =didntFindEventJson;
+                }
+                else{
+                    model.eventsList=data;
+                    numOfEvents=data.length;
+                    console.log(data);
+                }
+
+
+
+        });
+
+    }
     //sending request to the server in order to bring the specific category events from mongoDB.
-    $http.get("https://circlews.herokuapp.com/getEventsByCategory/"+catId).success(function(data){
-        console.log("getting eventts from server..."); 
-        model.eventsList=data;
-        numOfEvents=data.length;
-        console.log("list is is:");
-    });
+
 });
 
 
 categoryApp.controller("myEvent", function($scope,$http) {
+
     $scope.events = model;
+    console.log(model);
     $scope.index = 0;
-    $scope.price = 200;
+    $scope.price = 500;
     $scope.time = 21;
+    $scope.mainButtonText="SEARCH";
 
     $scope.goBackTime=function(){
              $scope.time=$scope.time-1;
-             if($scope.time==0){
+
+             if($scope.time==-1){
              $scope.time=23;
              }
     };
 
     $scope.goNextTime=function(){
+            if($scope.time==24){
+                $scope.time=0;
+            }
              $scope.time=$scope.time+1;
              if($scope.time==24){
-             $scope.time=01;
+             $scope.time=0;
              }
     };
 
     $scope.goBackPrice=function(){
              $scope.price=$scope.price - 50;
-             if($scope.price==50){
-             $scope.price=200;
+             if($scope.price==0){
+                 $scope.price=1050;
              }
     };
     $scope.goNextPrice=function(){
              $scope.price=$scope.price+50;
-             if($scope.price==350){
-                $scope.price=$scope.price+50;
+             if($scope.price==1050){
+                $scope.price=50;
              }
     };
     $scope.goNextEvent=function(){
@@ -83,8 +122,72 @@ categoryApp.controller("myEvent", function($scope,$http) {
         else {
             image.src = "images/unlike.png";
         }
-    }   
+    }
+     $scope.doingSearch=function(){
+        console.log("doingSearchFunc - serching..... data is: ");
+        // $http.get("localhost:3000/findEventsByTimeAndPrice?time=21:00&price=90&cat=NIGHTLIFE"+$scope.events.eventsList[$scope.index].id).success(function(data){
+        //     console.log("set like:" + data);
+        // });
+        
+        // $http.get("localhost:3000/findEventsByTimeAndPrice?time=21:00&price=90&cat=NIGHTLIFE").success(function(data){
+        //     if(err)
+        //         console.log(err);
+        //     console.log(data);
+        // });
+
+        $http({
+                method : "GET",
+                url : "http://localhost:3000/findEventsByTimeAndPrice?time="+$scope.time+":00&price="+$scope.price+"&cat="+catId
+                //url : "http://localhost:3000/findEventsByTimeAndPrice?time=21:00&price=90&cat=NIGHTLIFEx"
+             }).then(function mySucces(response) {
+                console.log("success responce from server in search function  ");
+                console.log(response.data);
+                console.log("res length is:" +response.data.length);
+                if(response.data.length==undefined){
+                    console.log("didnt find nothing in the search");
+                    var didntFindEventJson=[{name:"Didnt find nothing",short_description:"Please go back to serach bar or refresh the page"}];
+                    console.log(didntFindEventJson);
+                    numOfEvents=1;
+                    model.eventsList =didntFindEventJson;
+                }
+                else{
+                    numOfEvents=response.data.length;
+                    model.eventsList =response.data;
+                    $scope.index=0; //show the first resut on the screen
+                }
+                //$scope.myWelcome = response.data;
+             }, function myError(response) {
+                console.log("got error from server if search function  ");
+                console.log(response.statusText);
+                //$scope.myWelcome = response.statusText;
+             });
+
+
+    }     
+    $scope.hidePrimeryPageEvent=function(){
+        //console.log("test55");
+        if(isSearchBarOpen==false){
+            document.getElementById("primeryPage").style.visibility = "hidden";
+            document.getElementById("longDescription").style.visibility = "hidden";
+            document.getElementById("openedSearch").style.visibility = "visible";
+            isSearchBarOpen=true;
+             $scope.mainButtonText="GO!";
+
+        }
+        else{
+            document.getElementById("primeryPage").style.visibility = "visible";
+            document.getElementById("openedSearch").style.visibility = "hidden";
+            isSearchBarOpen=false;
+            $scope.mainButtonText="SEARCH";
+            $scope.doingSearch();
+        }
+    }
+ 
 });
+var isSearchBarOpen=false; //change to flase!!
+//document.getElementById("primeryPage").style.visibility = "hidden"; //delete
+//document.getElementById("openedSearch").style.visibility = "visible";//delete
+
 
 function hidefunc(){
     document.getElementById("primeryPage").style.visibility = "hidden";
@@ -96,12 +199,10 @@ function hideLongDescription(){
     document.getElementById("longDescription").style.visibility = "hidden";
 }
 
-function hideEvent(){
-    document.getElementById("primeryPage").style.visibility = "hidden";
-    document.getElementById("openedSearch").style.visibility = "visible";
-}
+
 
 function hideSearch(){
     document.getElementById("primeryPage").style.visibility = "visible";
     document.getElementById("openedSearch").style.visibility = "hidden";
+    isSearchBarOpen==false;
 }

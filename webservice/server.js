@@ -33,7 +33,7 @@ app.get('/getEventsByUser/:userMail',eventsModuleController.getEventsByUser);
 app.get('/getFriendsByUserMail/:userMail',eventsModuleController.getFriendsByUserMail);
 
 
-//EXAMPLE - http://localhost:3000/findEventsByTimeAndPrice?time=23:00&price=80
+//EXAMPLE - http://localhost:3000/findEventsByTimeAndPrice?time=21:00&price=90&cat=NIGHTLIFE
 app.get('/findEventsByTimeAndPrice',eventsModuleController.findEventsByTimeAndPrice);
 
 

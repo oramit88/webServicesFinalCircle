@@ -7,19 +7,19 @@
         <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="css/style.css" >
      </head>
-     
      <body ng-controller="myEvent" id="categoryImg" style="background-image:url(images/{{events.eventsList[index].url}});">
         <div id="primeryPage">
               <section class="list-group-item" id="logo">
                   <div class="colorImgFavo"></div>
-                  <a href="mainmenu.html?user={{currUser.currentUser}}"><button type="button" class="btn btn-default" id="home"> <span class="glyphicon glyphicon-home"></span></button></a>
+                  <a href="mainmenu.html?user={{events.CurrentUser}}"><button type="button" class="btn btn-default" id="home"> <span class="glyphicon glyphicon-home"></span></button></a>
               </section>
               <div class="jumbotron">
                   <h1 class="display-3">{{events.eventsList[index].name}}<img id="myImage" src="../images/unlike.png" ng-click="changeImage()"></h1>
                   <p><a href="#" id="description" class="lead" onclick="hidefunc()">{{events.eventsList[index].short_description}}</a></p>
                   <hr class="m-y-2">
                   <section id="iconPosi">
-                      <p class="posi"><span class="glyphicon glyphicon-map-marker"></span><span>{{events.eventsList[index].distance}}</span><span class="posi2">{{events.eventsList[index].category}}</span>&#8362;<span>{{events.eventsList[index].price}}</span></p>
+                      <p class="posi"><span class="glyphicon glyphicon-map-marker"></span><span>{{events.eventsList[index].distance}}</span><span class="posi2">{{events.eventsList[index].category}}</span>&#8362;<span>{{events.eventsList[index].price}}</span>  &#8986;<span>{{events.eventsList[index].time}}</span></p>
+                    
                   </section>
                   <p class="lead" id="goButn">
                       <button type="button" class="btn btn-default" ng-click="goNextEvent()"> > </button>
@@ -32,52 +32,57 @@
               <h1 class="display-3">{{events.eventsList[index].name}}</h1>
               <p class="descriptionFont"> {{events.eventsList[index].long_description}}</p>
       </div>
+
+
       <div id="searchMenu">
-          <button type="button" class="btn btn-secondary" onclick="hideEvent()">TODAY</button>
+          <button type="button" class="btn btn-secondary" ng-click="hidePrimeryPageEvent()">{{mainButtonText}}</button>
       </div>
       <div id="openedSearch">
         <section class="searchLine">
-            <table class="table">
-            <thead>
-            <tr>
-            <td><button type="button"  class="btn btn-primary btn-lg" ng-click="goBackPrice()"> < </button></td>
-            <td>{{price-100}}</td>
-            <td>{{price-50}}</td>
-            <td class="test">{{price}}</td>
-            <td>{{price+50}}</td>
-            <td>{{price+100}}</td>
-            <!-- <td>{{price+150}}</td> -->
-            <td><button type="button" class="btn btn-primary btn-lg" ng-click="goNextPrice()"> > </button></td>
-           </tr>
-          </thead>
-          </table>
+              <table class="table">
+              <thead>
+                  <tr>
+                    <p class="searchBarTitles">Max Price<p>
+                      <td><button type="button"  class="btn btn-primary btn-lg" ng-click="goBackPrice()"> < </button></td>
+                      <td>{{price-100}}</td>
+                      <td>{{price-50}}</td>
+                      <td class="test">{{price}}</td>
+                      <td>{{price+50}}</td>
+                      <td>{{price+100}}</td>
+                      <!-- <td>{{price+150}}</td> -->
+                      <td><button type="button" class="btn btn-primary btn-lg" ng-click="goNextPrice()"> > </button></td>
+                  </tr>
+
+            </thead>
+            </table>
         </section>
         <section class="searchLine">
-            <table class="table">
-            <thead>
-            <tr>
-            <td><button type="button"  class="btn btn-primary btn-lg" ng-click="goBackTime()"> < </button></td>
-            <td>{{time-1}}:00 </td>
-            <td>{{time-1}}:30</td>
-            <td class="test">{{time}}:00</td>
-            <td>{{time}}:30</td>
-            <td>{{time+1}}:00</td>
-            <td><button type="button" class="btn btn-primary btn-lg" ng-click="goNextTime()"> > </button></td>
-           </tr>
-          </thead>
-          </table>
+              <table class="table">
+              <thead>
+                  <tr>
+                    <p class="searchBarTitles">TIME<p>
+                      <td><button type="button"  class="btn btn-primary btn-lg" ng-click="goBackTime()"> < </button></td>
+                      <td>{{time-2}}:00 </td>
+                      <td>{{time-1}}:00</td>
+                      <td class="test">{{time}}:00</td>
+                      <td>{{time+1}}:00</td>
+                      <td>{{time+2}}:00</td>
+                      <td><button type="button" class="btn btn-primary btn-lg" ng-click="goNextTime()"> > </button></td>
+                  </tr>
+            </thead>
+            </table>
         </section>
         <section class="searchLine">
            <table class="table">
             <thead>
             <tr>
             <td><button type="button"  class="btn btn-primary btn-lg" ng-click="goBackSearch()"> < </button></td>
-            <td>10</td>
-            <td>20</td>
-            <td>30</td>
-            <td>40</td>
-            <td>50</td>
-            <td>60</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
             <td><button type="button" class="btn btn-primary btn-lg" ng-click="goNextSearch()"> > </button></td>
            </tr>
           </thead>
@@ -88,5 +93,6 @@
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
       <script src="js/lib/angular/angular.min.js"></script>
       <script src="js/category.js"></script>
+
     </body>
 </html>

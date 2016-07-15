@@ -29,15 +29,15 @@ categoryApp.controller("myEvent", function($scope,$http) {
 
     $scope.goBackPrice=function(){
              $scope.price=$scope.price-50;
-             if($scope.price<0){
-             $scope.price=10;
+             if($scope.price==50){
+             $scope.price=200;
              }
             //$scope.todo.items.push({action:actionText, done:false});
     };
     $scope.goNextPrice=function(){
              $scope.price=$scope.price+50;
              if($scope.price==350){
-                $scope.price=0;
+                $scope.price=$scope.price+50;
              }
             //$scope.todo.items.push({action:actionText, done:false});
     };

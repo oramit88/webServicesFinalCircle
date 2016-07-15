@@ -30,11 +30,16 @@ categoryApp.controller("myEvent", function($scope,$http) {
 
     $scope.goBackTime=function(){
              $scope.time=$scope.time-1;
-             console.log($scope.time);
              if($scope.time==0){
              $scope.time=23;
              }
-            //$scope.todo.items.push({action:actionText, done:false});
+    };
+
+    $scope.goNextTime=function(){
+             $scope.time=$scope.time+1;
+             if($scope.time==24){
+             $scope.time=01;
+             }
     };
 
     $scope.goBackPrice=function(){
@@ -42,14 +47,12 @@ categoryApp.controller("myEvent", function($scope,$http) {
              if($scope.price==50){
              $scope.price=200;
              }
-            //$scope.todo.items.push({action:actionText, done:false});
     };
     $scope.goNextPrice=function(){
              $scope.price=$scope.price+50;
              if($scope.price==350){
                 $scope.price=$scope.price+50;
              }
-            //$scope.todo.items.push({action:actionText, done:false});
     };
     $scope.goNextEvent=function(){
             var image = document.getElementById('myImage');

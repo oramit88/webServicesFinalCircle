@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html ng-app="favoritesApp">
+<head>
+    <title>Circle app</title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="css/style.css" >
+</head>
+<body ng-controller="myCtrl">
+    <section ng-controller="goToHomeCntrl" class="list-group-item" id="logo">
+        <a href="mainmenu.html?user={{goHomeLink}}"><button type="button" class="btn btn-default" id="home"><span class="glyphicon glyphicon-home"></span></button></a>
+      </section>
+    <form>
+      <fieldset class="form-group">
+        <label for="formGroupExampleInput">Name:</label>
+        <input type="text" neme="name" class="form-control" id="formGroupExampleInput" placeholder="Enter event name">
+      </fieldset>
+      <fieldset class="form-group">
+        <label for="exampleSelect1" name="id">Category:</label>
+        <select class="form-control" id="exampleSelect1">
+          <option value="MUSIC">Music</option>
+          <option value="ART">Art</option>
+          <option value="NIGHTLIFE">Nightlife</option>
+          <option value="RESTARANTS">Restarants</option>
+          <option value="BARS&PUBS">Bars&Pubs</option>
+          <option value="THEATRE">Theatre</option>
+          <option value="ATTRACTIONS">Attractions</option>
+        </select>
+      </fieldset>
+      <fieldset class="form-group">
+        <label for="formGroupExampleInput">Date:</label>
+        <input type="date" neme="date" class="form-control" id="formGroupExampleInput">
+      </fieldset>
+      <fieldset class="form-group">
+        <label for="formGroupExampleInput">Time:</label>
+        <input type="text" neme="time" class="form-control" id="formGroupExampleInput" placeholder="Time HH:MM">
+      </fieldset>
+      <fieldset class="form-group">
+        <label for="exampleInputPassword1">Price:</label>
+        <input type="password" neme="price"class="form-control" id="exampleInputPassword1" placeholder="Enter price">
+      </fieldset>
+      <fieldset class="form-group">
+        <label for="exampleInputPassword1">Distance:</label>
+        <input type="password" neme="distance"class="form-control" id="exampleInputPassword1" placeholder="Enter distance">
+      </fieldset>
+      <fieldset class="form-group">
+        <label for="exampleTextarea">Short Description:</label>
+        <textarea name="short_description"class="form-control" id="exampleTextarea" rows="3"></textarea>
+      </fieldset>
+      <fieldset class="form-group">
+        <label for="exampleTextarea">Long Description:</label>
+        <textarea name="long_description"class="form-control" id="exampleTextarea" rows="5"></textarea>
+      </fieldset>
+      <fieldset class="form-group">
+        <label for="exampleInputFile">File input</label>
+        <input type="file" class="form-control-file" id="exampleInputFile">
+        <small class="text-muted">Photo in PNG format only</small>
+      </fieldset>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    
+          <script src="js/lib/angular/angular.min.js"></script>
+          <script src="js/createEvent.js"></script>
+</body>
+</html>

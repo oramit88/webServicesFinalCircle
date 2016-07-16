@@ -370,9 +370,7 @@ section.searchLine{
   font-size: 55px;
 }
 
-
-
-.test{
+.searchColor{
   background-color: gray;
 }
 
@@ -381,13 +379,22 @@ section.searchLine{
    color:red;
    margin: 0 auto;
      text-align: center;
-
 }
 
+.form-group{
+  width: 100%;
+  font-size: 50px;
+}
 
+.form-control{
+  width: 100%;
+  height: auto;
+  font-size: 40px;
+}
 
-
-
+#test{
+  font-size: 40px;
+}
 
 }
 

@@ -1,7 +1,8 @@
+//web services course final project Server Controller- "circle" system.
 var mongoose=require('mongoose');
-var eventModel=require('./event');//the schema
+var eventModel=require('./event');//the schema of events collection
 var categoryModel=require('./categories');//the schema
-var userModel=require('./user');
+var userModel=require('./user'); //the schema of users collection
 var url=require ('url');
 
 //get All categories from categories collection
@@ -64,13 +65,15 @@ exports.getAllUsers=function(req,res){
    });
 }
 
-
  exports.setLikeToEvent=function(req,res){
         console.log("test: in EventsController- setLikeToEvent2 function");
-        var CurrentUserEmail="oramit88@gmail.com";
-        var eventID = req.params.eventId;
-        console.log("test: my EventID: "+eventID);
-        var query= userModel.update({email: "oramit88@gmail.com"},{
+        var urlPart=url.parse(req.url,true);
+        var query=urlPart.query;
+        var CurrentUserEmail=query.user;
+        var eventID=query.eventId;
+        console.log("like to: "+eventID + "user is:"+CurrentUserEmail);
+
+        var query= userModel.update({email: CurrentUserEmail},{
               $addToSet:{like:eventID}
         });
         query.exec(function(err,results){
@@ -87,10 +90,14 @@ exports.getAllUsers=function(req,res){
 
  exports.setUnLikeToEvent=function(req,res){
         console.log("test: in EventsController- setUnLikeToEvent function");
-        var CurrentUserEmail="oramit88@gmail.com";
-        var eventID = req.params.eventId;
-        console.log("test: my EventID: "+eventID);
-        var query= userModel.update({email: "oramit88@gmail.com"},{
+        var urlPart=url.parse(req.url,true);
+        var query=urlPart.query;
+        var CurrentUserEmail=query.user;
+        var eventID=query.eventId;
+
+        console.log("UNlike to: "+eventID + "user is:"+CurrentUserEmail);
+      
+        var query= userModel.update({email: CurrentUserEmail},{
               $pullAll:{like:[eventID]}
         });
 
@@ -105,12 +112,10 @@ exports.getAllUsers=function(req,res){
         res.json("ok");  
  }
 
-//returns current logedIn user events
+//returns current logedIn user "like" events in order to show them on favorites Page.
 exports.getEventsByUser=function(req,res){
         var CurrentUserEmail = req.params.userMail;
-        //var CurrentUserEmail="oramit88@gmail.com"; //will change after g+ implementation.
         console.log("test: in EventsController- getEventsByUser function. user is:"+CurrentUserEmail);
-        //console.log("test my user is: "+CurrentUserEmail);
         //finding the current user in users collection and searching the events in events collection.
         var query=userModel.find().where('email',CurrentUserEmail);
         query.exec(function(err,doc){
@@ -126,7 +131,6 @@ exports.getEventsByUser=function(req,res){
                 eventModel.find({'id':{$in:LikeEventsArray}}).exec(function(err,docs){
                     res.json(docs);
                 })
-                //res.json(doc);
             }
         });
  }
@@ -158,6 +162,7 @@ exports.getEventsByUser=function(req,res){
         });
  }
 
+//the search bar function
 exports.findEventsByTimeAndPrice=function(req,res){
         console.log("test: in findEventsByTimeAndPrice- findEventsByTimeAndPrice function");
         var urlPart=url.parse(req.url,true);
@@ -168,7 +173,7 @@ exports.findEventsByTimeAndPrice=function(req,res){
 
         console.log("the time is: " +searchTime+" the price is: "+searchPrice +"category is: "+categ);
 
-        if(categ=="ALL"){
+        if(categ=="ALL"){ //all means all categories. need to search by price and time
             eventModel.find({time:searchTime}).where('price').lte(searchPrice).exec(function(err,doc){
                 console.log("searching...");
                 if(err){
@@ -185,8 +190,6 @@ exports.findEventsByTimeAndPrice=function(req,res){
                     else{ //succsesfull result
                         res.json(doc);
                     }
-
-                    
                 }
              });
         }
@@ -207,14 +210,11 @@ exports.findEventsByTimeAndPrice=function(req,res){
                     else{ //succsesfull result
                         res.json(doc);
                     }
-
-                    
                 }
              });
         }       
  }
 
-//working!
 //EXAMPLE - http://localhost:3000/getEvantsThatUserInvaitedTo/oramit88@gmail.com
  exports.getEvantsThatUserInvaitedTo=function(req,res){
         console.log("test: in getEvantsThatUserInvaitedTo- getEvantsThatUserInvaitedTo function");
@@ -233,7 +233,6 @@ exports.findEventsByTimeAndPrice=function(req,res){
                 //console.log("number of events is: "+ numOfEvents);
                 var eventName;
                 var intEventId;
-
                 var eventsIdsArray=[];
                 for(var i = 0 ; i < numOfEvents; i++){
                     intEventId=parseInt(doc[0].invited_to[i].event_id);
@@ -263,11 +262,6 @@ exports.findEventsByTimeAndPrice=function(req,res){
         });
  }
 
- 
-
-
-
-
  exports.getEvantsThatUserInvited=function(req,res){
         console.log("test:  getEvantsThatUserInvaitedTo function");
         var userMail = req.params.userMail;
@@ -293,7 +287,6 @@ exports.findEventsByTimeAndPrice=function(req,res){
                      eventsIdsArray.push(intEventId);
                 }
                 console.log("eventsIdsArray"+ eventsIdsArray);
-              
                 eventModel.find({'id':{$in:eventsIdsArray}}).sort("id").exec(function(err,docs){ 
                     var  eventsArray=[];
                     console.log("see status?");
@@ -314,8 +307,6 @@ exports.findEventsByTimeAndPrice=function(req,res){
             }
         });
  }
-
-
 
 exports.isUserExist=function(req,res){
         var userMail = req.params.userMail; //will change after g+ implementation.
@@ -344,7 +335,6 @@ exports.isUserExist=function(req,res){
             }
         });
  }
-
 
  exports.inviteUserToEvent=function(req,res){
         console.log("test: in inviteUserToEvent function");
@@ -385,13 +375,7 @@ exports.isUserExist=function(req,res){
                 console.log("\n finishing Update doc: "+toUser+"with: "+myToJson);
             }
         });
-
-
  }
-
-
-
-
 
  exports.isUserLikeEvent=function(req,res){
         console.log("test: in isUserLikeEvent function");
@@ -440,7 +424,7 @@ exports.isUserExist=function(req,res){
         res.end();
          //var urlPart=url.parse(req.url,true);
          var query=req.query;
-         console.log("query is is:" + query);
+        console.log("query is is:" + query);
          
         var eventName=query.name;
         console.log("eventName is is:" + eventName);
@@ -467,53 +451,27 @@ exports.isUserExist=function(req,res){
         var eventLongDescription=query.long_description;
         console.log("eventLongDescription is is:" + eventLongDescription);
 
+        var newEvent=new eventModel({
+            "name": "for testing event",
+            "id": 99,
+            "category": "NIGHTLIFE",
+            "date": "7.7.16",
+            "time": "23:00",
+            "price": 100,
+            "distance": 5.8,
+            "short_description": "Dance Club is an organization that allows it members to experience the wonder of dance and the joy of performing.",
+            "long_description": "Dance club has been a staple of Waterford High School since the 60\u2019s.  It has grown in numbers and popularity over the years.  Most recently the numbers have grown from eight students in 1995 to the sixty seven members that participated last year.",
+            "invited_people_amount": 4,
+            "url": "gospeloke.png"
+        });
 
-         //var eventCategory=urlPart.category;
-      
-        // var eventDate=query.eventDate;
-        //  var eventTime=query.eventTime;
-        //  var eventPrice=query.eventPrice;
-        //  var eventDistance=query.eventDistance;
-        // console.log("name is: "+eventName+ " category is: "+eventCategory+" date is:"+eventDate+" time is:" +eventTime+"price is:"+eventPrice+" distance:"+eventDistance);
-        
-
-
-
-        // var eventName=query.eventName;
-        // var toUser=query.toUser;
-        // var eventId=query.evantID;
-        // console.log("fromUser is: " +fromUser+" toUser is: "+toUser+ " evantID is "+eventId);
-        // //updating the "from" user document
-        // myFromJson= {"event_id": eventId,
-        //     "friend_email": toUser,
-        //     "status": "waiting"}
-        // var query= userModel.update({email: fromUser},{
-        //     $addToSet:{invited_events:myFromJson}
-        // });
-        // query.exec(function(err,results){
-        //     if(err){
-        //         console.log("err is:"+err);
-        //     }
-        //     else{
-        //         console.log("\n finishing Update doc: "+fromUser+"with: "+myFromJson);
-        //     }
-        // });
-
-        // //updating the "to" user document
-        // myToJson= {"event_id": eventId,
-        //     "status": "waiting",
-        //     "invited_by": fromUser}
-        // var query2= userModel.update({email: toUser},{
-        //     $addToSet:{invited_to:myToJson}
-        // });
-        // query2.exec(function(err,results){
-        //     if(err){
-        //         console.log("err is:"+err);
-        //     }
-        //     else{
-        //         console.log("\n finishing Update doc: "+toUser+"with: "+myToJson);
-        //     }
-        // });
-
-
+        newEvent.save(function(err,doc){
+            if(err){
+                console.log("error saving doc- ");
+                console.log(err);
+            }
+            else{
+                console.log("save successful");
+            }
+        });
  }

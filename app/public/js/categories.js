@@ -3,7 +3,6 @@ var pageUrl = window.location.search.substring(1).split("&");
 var currentUser = pageUrl[0].split("=")[1];
 console.log("current user is:"+currentUser);
 
-
 var circleApp = angular.module('circleApp',[]);
 
 var model = {

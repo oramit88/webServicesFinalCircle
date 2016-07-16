@@ -86,7 +86,6 @@ categoryApp.run(function($http){
             numOfFriends=data.length;
             model.friendsList.unshift({email:"NONE"});
             numOfFriends++;
-             //console.log (model.friendsList[0].email);
     });
 });
 
@@ -186,13 +185,13 @@ categoryApp.controller("myEvent", function($scope,$http) {
     $scope.changeImage =function() { //Pressin on the heart image == giving LIKE to the event
         if (heartimage.src.match($scope.UnLikeImage)) {
             heartimage.src = $scope.likeImage;
-            $http.get("https://circlews.herokuapp.com/setLikeToEvent/"+$scope.events.eventsList[$scope.index].id).success(function(data){
+            $http.get("http://localhost:3000/setLikeToEvent?eventId="+$scope.events.eventsList[$scope.index].id+"&user="+CurrentUser).success(function(data){
                 console.log("set like:" + data);
             });
         } 
         else {
             heartimage.src = $scope.UnLikeImage; 
-            $http.get("https://circlews.herokuapp.com/setUnLikeToEvent/"+$scope.events.eventsList[$scope.index].id).success(function(data){
+            $http.get("http://localhost:3000/setUnLikeToEvent?eventId="+$scope.events.eventsList[$scope.index].id+"&user="+CurrentUser).success(function(data){
                 console.log("set Unlike:" + data);
             });
         }

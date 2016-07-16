@@ -9,7 +9,6 @@ console.log("curr user is: "+currentUser);
   };
 
  favoritesApp.run(function($http){
-     console.log("test2");
     $http.get("http://localhost:3000/getEventsByUser/"+currentUser).success(function(data){
      console.log(data);
       model.favoritesEvents = data;

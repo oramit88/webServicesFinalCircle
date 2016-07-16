@@ -9,7 +9,6 @@ var model = {
 };
 
  friendsApp.run(function($http){
-     console.log("test2");
     $http.get("http://localhost:3000/getFriendsByUserMail/"+currentUser).success(function(data){
      model.myFriends=data;
      console.log(data);
@@ -18,5 +17,4 @@ var model = {
 
  friendsApp.controller('myCtrl', function ($scope) {
    $scope.friendList = model;
-   //console.log("curr user is2:"+friendList.currentUser);
  });

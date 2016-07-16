@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html ng-app="createApp">
+<head>
+    <title>Circle app</title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="css/style.css" >
+</head>
+<body ng-controller="myCtrl">
+    <section ng-controller="goToHomeCntrl" class="list-group-item" id="logo">
+        <a href="mainmenu.html?user={{goHomeLink}}"><button type="button" class="btn btn-default" id="home"><span class="glyphicon glyphicon-home"></span></button></a>
+      </section>
+    <form class="form-group">
+        <label>Name:</label>
+        <input type="text" name="name" value="" class="form-control" id="formGroupExampleInput" placeholder="Enter event name">
+        <label>Category:</label>
+        <select name="category" class="form-control" id="exampleSelect1">
+          <option value="MUSIC">Music</option>
+          <option value="ART">Art</option>
+          <option value="NIGHTLIFE">Nightlife</option>
+          <option value="RESTARANTS">Restarants</option>
+          <option value="BARS&PUBS">Bars&Pubs</option>
+          <option value="THEATRE">Theatre</option>
+          <option value="ATTRACTIONS">Attractions</option>
+        </select>
+        <label>Date:</label>
+        <input type="date" name="date" value="" class="form-control" id="formGroupExampleInput">
+        <label>Time:</label>
+        <input type="text" name="time" class="form-control" id="formGroupExampleInput" placeholder="Time HH:MM">
+        <label for="exampleInputPassword1">Price:</label>
+        <input type="number" name="price" class="form-control" id="exampleInputPassword1" placeholder="Enter price">
+        <label>Distance:</label>
+        <input type="number" name="distance" class="form-control" id="exampleInputPassword1" placeholder="Enter distance">
+        <label>Short Description:</label>
+        <textarea name="short_description" class="form-control" id="exampleTextarea" rows="3"></textarea>
+        <label>Long Description:</label>
+        <textarea name="long_description"class="form-control" id="exampleTextarea" rows="5"></textarea>
+
+        <a href="#" class="btn btn-primary btn-lg active" role="button" onclick="create()">Submit</a>
+    </form>
+    
+          <script src="js/lib/angular/angular.min.js"></script>
+          <script src="js/createEvent.js"></script>
+</body>
+</html>

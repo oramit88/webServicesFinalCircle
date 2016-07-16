@@ -22,7 +22,7 @@
                     
                   </section>
                   <p class="lead" id="goButn">
-                      <button type="button" class="btn btn-default" ng-click="goNextEvent()"> > </button>
+                      <button type="button" class="btn btn-default" ng-click="goNextEvent()">< > </button>
                       <button type="button"  class="btn btn-default" ng-click="goBackEvent()"> < </button>
                   </p>
               </div>
@@ -60,7 +60,7 @@
               <table class="table">
               <thead>
                   <tr>
-                    <p class="searchBarTitles">TIME<p>
+                    <p class="searchBarTitles">Time<p>
                       <td><button type="button"  class="btn btn-primary btn-lg" ng-click="goBackTime()"> < </button></td>
                       <td>{{time-2}}:00 </td>
                       <td>{{time-1}}:00</td>
@@ -75,16 +75,12 @@
         <section class="searchLine">
            <table class="table">
             <thead>
-            <tr>
-            <td><button type="button"  class="btn btn-primary btn-lg" ng-click="goBackSearch()"> < </button></td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td><button type="button" class="btn btn-primary btn-lg" ng-click="goNextSearch()"> > </button></td>
-           </tr>
+                  <tr>
+                   <p class="searchBarTitles">Invite Friend to: {{events.eventsList[index].name}}<p>
+                    <td><button type="button"  class="btn btn-primary btn-lg" ng-click="goBackFriend()"> < </button></td>
+                        <td>{{events.friendsList[FriendIndex].email}}</td>
+                      <td><button type="button" class="btn btn-primary btn-lg" ng-click="goNextFriend()"> > </button></td>
+                 </tr>
           </thead>
           </table>
         </section>

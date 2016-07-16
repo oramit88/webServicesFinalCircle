@@ -4,12 +4,13 @@ var pageUrl = window.location.search.substring(1).split("&");
 var currentUser = pageUrl[0].split("=")[1];
 console.log("curr user is: "+currentUser);
  
+ 
  var model = {
-
+    currentUser
   };
 
   var model2 = {
-
+    currentUser
   };
 
  historyApp.run(function($http){
@@ -22,6 +23,10 @@ console.log("curr user is: "+currentUser);
 
  historyApp.controller('myCtrl', function ($scope) {
    $scope.historyList = model;
+ });
+
+ historyApp.controller('goToHomeCntrl', function ($scope) {
+   $scope.goHomeLink = currentUser;
  });
 
 

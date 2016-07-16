@@ -14,7 +14,9 @@ var model = {
      CurrentUser
  };
 var numOfEvents;
-    console.log("user is:"+model.CurrentUser);
+var numOfFriends;
+
+console.log("user is:"+model.CurrentUser);
 categoryApp.run(function($http){
     if(catId=="ALL")
     {
@@ -49,6 +51,16 @@ categoryApp.run(function($http){
         });
 
     }
+    $http.get("http://localhost:3000/getFriendsByUserMail/"+CurrentUser).success(function(data){
+            console.log("getting user friendList from server..."); 
+            console.log (data);
+            model.friendsList=data;
+            numOfFriends=data.length;
+            model.friendsList.unshift({email:"NONE"});
+            numOfFriends++;
+             //console.log (model.friendsList[0].email);
+    });
+
     //sending request to the server in order to bring the specific category events from mongoDB.
 
 });
@@ -59,13 +71,14 @@ categoryApp.controller("myEvent", function($scope,$http) {
     $scope.events = model;
     console.log(model);
     $scope.index = 0;
+    $scope.FriendIndex=0;
     $scope.price = 500;
     $scope.time = 21;
     $scope.mainButtonText="SEARCH";
 
+
     $scope.goBackTime=function(){
              $scope.time=$scope.time-1;
-
              if($scope.time==-1){
              $scope.time=23;
              }
@@ -80,6 +93,34 @@ categoryApp.controller("myEvent", function($scope,$http) {
              $scope.time=0;
              }
     };
+
+
+/////////////////////     $scope.FriendIndex=0;
+  $scope.goBackFriend=function(){
+     if($scope.FriendIndex==0){
+             $scope.FriendIndex=numOfFriends;
+        }
+        $scope.FriendIndex=$scope.FriendIndex-1;
+            
+    };
+
+    $scope.goNextFriend=function(){
+            $scope.FriendIndex=$scope.FriendIndex+1;
+             if($scope.FriendIndex==numOfFriends){
+             $scope.FriendIndex=0;
+             }
+    };
+///////////////////
+
+
+
+
+
+
+
+
+
+
 
     $scope.goBackPrice=function(){
              $scope.price=$scope.price - 50;
@@ -125,16 +166,6 @@ categoryApp.controller("myEvent", function($scope,$http) {
     }
      $scope.doingSearch=function(){
         console.log("doingSearchFunc - serching..... data is: ");
-        // $http.get("localhost:3000/findEventsByTimeAndPrice?time=21:00&price=90&cat=NIGHTLIFE"+$scope.events.eventsList[$scope.index].id).success(function(data){
-        //     console.log("set like:" + data);
-        // });
-        
-        // $http.get("localhost:3000/findEventsByTimeAndPrice?time=21:00&price=90&cat=NIGHTLIFE").success(function(data){
-        //     if(err)
-        //         console.log(err);
-        //     console.log(data);
-        // });
-
         $http({
                 method : "GET",
                 url : "http://localhost:3000/findEventsByTimeAndPrice?time="+$scope.time+":00&price="+$scope.price+"&cat="+catId
@@ -160,8 +191,33 @@ categoryApp.controller("myEvent", function($scope,$http) {
                 console.log("got error from server if search function  ");
                 console.log(response.statusText);
                 //$scope.myWelcome = response.statusText;
-             });
+        });
+        if($scope.FriendIndex==0){ 
+            console.log("no friend to invite");
+         } 
+        else{
+            console.log("invite friend:");
+            var invitedTo= model.friendsList[$scope.FriendIndex].email;
+            console.log(invitedTo);
+            var eventId=$scope.events.eventsList[$scope.index].id;
+            console.log("IventId in order invite to:");
+            console.log(eventId);
 
+             $http({
+                method : "GET",
+                url : "http://localhost:3000/inviteUserToEvent?fromUser="+CurrentUser+"&toUser="+invitedTo+"&evantID="+eventId
+             }).then(function mySucces(response) {
+                console.log("success responce from server in invite user to event function");
+             }, function myError(response) {
+                console.log("got error from invite user to event function  ");
+                console.log(response.statusText);
+                //$scope.myWelcome = response.statusText;
+        });
+
+
+
+
+        }//else   
 
     }     
     $scope.hidePrimeryPageEvent=function(){

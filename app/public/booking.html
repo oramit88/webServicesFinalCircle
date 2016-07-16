@@ -9,23 +9,20 @@
 </head>
 <body id="bookingsColor">
     <div class="list-group" id="font" >
-       <section class="list-group-item" id="logo">
-       <div class="colorImgFavo"></div>
-         <a href="mainmenu.html?user={{currUser.currentUser}}"><button type="button" class="btn btn-default" id="home">
-          <span class="glyphicon glyphicon-home"></span>
-          </button></a>
-       </section>
-       <div id="favoriteColor" ng-controller="myCtrl">
-       <h1>Events That I was invaited to:</h1>
-      <a ng-href="#" class="list-group-item" ng-repeat="event in historyList.myHistory"><span class="{{event.status}}"><p class="nameSize">{{event.name}}</p></span> By {{event.invited_by}} </a>
-      </div>
-
-      <div id="favoriteColor2" ng-controller="myCtrl2">
-      <h1>Events That I invaited:</h1>
-      <a ng-href="#" class="list-group-item" ng-repeat="events in invaitedList.invaitedHistory"><span class="{{events.status}}"><p class="nameSize">{{events.name}}</p></span>{{events.friend_email}}</a>
-      </div>
-      </div>
-          <script src="js/lib/angular/angular.min.js"></script>
-          <script src="js/booking.js"></script>
+        <section ng-controller="goToHomeCntrl" class="list-group-item" id="logo">
+            <div class="colorImgFavo"></div>
+            <a href="mainmenu.html?user={{goHomeLink}}"><button type="button" class="btn btn-default" id="home"><span class="glyphicon glyphicon-home"></span></button></a>
+        </section>
+        <div id="favoriteColor" ng-controller="myCtrl">
+            <h1>Events That I was invaited to:</h1>
+            <a ng-href="#" class="list-group-item" ng-repeat="event in historyList.myHistory"><span class="{{event.status}}"><p class="nameSize">{{event.name}}</p></span> By {{event.invited_by}} </a>
+        </div>
+        <div id="favoriteColor2" ng-controller="myCtrl2">
+          <h1>Events That I invaited:</h1>
+          <a ng-href="#" class="list-group-item" ng-repeat="events in invaitedList.invaitedHistory"><span class="{{events.status}}"><p class="nameSize">{{events.name}}</p></span>{{events.friend_email}}</a>
+          </div>
+        </div>
+    <script src="js/lib/angular/angular.min.js"></script>
+    <script src="js/booking.js"></script>
 </body>
 </html>

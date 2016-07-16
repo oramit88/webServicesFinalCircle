@@ -9,7 +9,7 @@ console.log("curr user is: "+currentUser);
   };
 
  favoritesApp.run(function($http){
-    $http.get("http://localhost:3000/getEventsByUser/"+currentUser).success(function(data){
+    $http.get("https://circlews.herokuapp.com/getEventsByUser/"+currentUser).success(function(data){
      console.log(data);
       model.favoritesEvents = data;
     });

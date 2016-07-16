@@ -7,12 +7,10 @@ console.log("current user is:"+currentUser);
 var model = {
       currentUser
 };
-//console.log("tessst"+ model.currentUser);
 
 mainMenu.controller("myMenu", function($scope) {
     $scope.currUser = model;
     $scope.test="abc";
-    //console.log("tessst2"+ currUser);
 });
 
   function onSignIn(googleUser) {

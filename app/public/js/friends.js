@@ -9,7 +9,7 @@ var model = {
 };
 
  friendsApp.run(function($http){
-    $http.get("http://localhost:3000/getFriendsByUserMail/"+currentUser).success(function(data){
+    $http.get("https://circlews.herokuapp.com/getFriendsByUserMail/"+currentUser).success(function(data){
      model.myFriends=data;
      console.log(data);
     });

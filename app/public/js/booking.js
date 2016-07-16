@@ -14,7 +14,7 @@ var model2 = {
   };
 
 historyApp.run(function($http){
-    $http.get("http://localhost:3000/getEvantsThatUserInvaitedTo/"+currentUser).success(function(data){
+    $http.get("https://circlews.herokuapp.com/getEvantsThatUserInvaitedTo/"+currentUser).success(function(data){
      model.myHistory=data;
      console.log(data);
     });
@@ -30,7 +30,7 @@ historyApp.controller('goToHomeCntrl', function ($scope) {
 
 
 historyApp.run(function($http){
-    $http.get("http://localhost:3000/getEvantsThatUserInvited/"+currentUser).success(function(data){
+    $http.get("https://circlews.herokuapp.com/getEvantsThatUserInvited/"+currentUser).success(function(data){
      model2.invaitedHistory=data;
      console.log(data);
     });

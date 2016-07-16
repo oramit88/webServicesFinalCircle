@@ -27,7 +27,7 @@ categoryApp.run(function($http){
             console.log(data);
             currEventId=model.eventsList[0].id;
             console.log("xxxID  is"+currEventId);
-            $http.get("http://localhost:3000/isUserLikeEvent?user="+CurrentUser+"&evantId="+currEventId).success(function(data){
+            $http.get("https://circlews.herokuapp.com/isUserLikeEvent?user="+CurrentUser+"&evantId="+currEventId).success(function(data){
                 console.log("xxxID  is"+currEventId);
                 //console.log ("IS-LIKE");
                 console.log(data.isUserLikeEvent);
@@ -62,7 +62,7 @@ categoryApp.run(function($http){
                     currEventId=model.eventsList[0].id;
                     console.log("curr ID  is"+currEventId);
                     //checking the is the current user like the current event- if so fill the heart image
-                    $http.get("http://localhost:3000/isUserLikeEvent?user="+CurrentUser+"&evantId="+currEventId).success(function(data){
+                    $http.get("https://circlews.herokuapp.com/isUserLikeEvent?user="+CurrentUser+"&evantId="+currEventId).success(function(data){
                         console.log(data.isUserLikeEvent);
                         var image = document.getElementById('myImage');
                         if(data.isUserLikeEvent=="TRUE"){                      
@@ -79,7 +79,7 @@ categoryApp.run(function($http){
             });
     }
     //getting the friends list of the current user.
-    $http.get("http://localhost:3000/getFriendsByUserMail/"+CurrentUser).success(function(data){
+    $http.get("https://circlews.herokuapp.com/getFriendsByUserMail/"+CurrentUser).success(function(data){
             console.log("getting user friendList from server..."); 
             console.log (data);
             model.friendsList=data;
@@ -110,7 +110,7 @@ categoryApp.controller("myEvent", function($scope,$http) {
                 $scope.index=0; //go beck to the start
             }
             //chacking if the user like the next event
-            $http.get("http://localhost:3000/isUserLikeEvent?user="+CurrentUser+"&evantId="+model.eventsList[$scope.index].id).success(function(data){
+            $http.get("https://circlews.herokuapp.com/isUserLikeEvent?user="+CurrentUser+"&evantId="+model.eventsList[$scope.index].id).success(function(data){
                     if(data.isUserLikeEvent=="TRUE"){
                         heartimage.src= $scope.likeImage;
                     }
@@ -124,7 +124,7 @@ categoryApp.controller("myEvent", function($scope,$http) {
              if($scope.index<0){
                 $scope.index=numOfEvents-1;
              }
-             $http.get("http://localhost:3000/isUserLikeEvent?user="+CurrentUser+"&evantId="+model.eventsList[$scope.index].id).success(function(data){
+             $http.get("https://circlews.herokuapp.com/isUserLikeEvent?user="+CurrentUser+"&evantId="+model.eventsList[$scope.index].id).success(function(data){
                     console.log ("goBackEvent event func");
                     //console.log ("CurrEventID: ");
                     //console.log(model.eventsList[$scope.index].id);
@@ -185,13 +185,13 @@ categoryApp.controller("myEvent", function($scope,$http) {
     $scope.changeImage =function() { //Pressin on the heart image == giving LIKE to the event
         if (heartimage.src.match($scope.UnLikeImage)) {
             heartimage.src = $scope.likeImage;
-            $http.get("http://localhost:3000/setLikeToEvent?eventId="+$scope.events.eventsList[$scope.index].id+"&user="+CurrentUser).success(function(data){
+            $http.get("https://circlews.herokuapp.com/setLikeToEvent?eventId="+$scope.events.eventsList[$scope.index].id+"&user="+CurrentUser).success(function(data){
                 console.log("set like:" + data);
             });
         } 
         else {
             heartimage.src = $scope.UnLikeImage; 
-            $http.get("http://localhost:3000/setUnLikeToEvent?eventId="+$scope.events.eventsList[$scope.index].id+"&user="+CurrentUser).success(function(data){
+            $http.get("https://circlews.herokuapp.com/setUnLikeToEvent?eventId="+$scope.events.eventsList[$scope.index].id+"&user="+CurrentUser).success(function(data){
                 console.log("set Unlike:" + data);
             });
         }
@@ -201,7 +201,7 @@ categoryApp.controller("myEvent", function($scope,$http) {
         console.log("doingSearchFunc - serching..... data is: ");
         $http({
                 method : "GET",
-                url : "http://localhost:3000/findEventsByTimeAndPrice?time="+$scope.time+":00&price="+$scope.price+"&cat="+catId
+                url : "https://circlews.herokuapp.com/findEventsByTimeAndPrice?time="+$scope.time+":00&price="+$scope.price+"&cat="+catId
                
              }).then(function mySucces(response) {
                 console.log("success responce from server in search function  ");
@@ -236,7 +236,7 @@ categoryApp.controller("myEvent", function($scope,$http) {
             console.log(eventId);
             $http({
                 method : "GET",
-                url : "http://localhost:3000/inviteUserToEvent?fromUser="+CurrentUser+"&toUser="+invitedTo+"&evantID="+eventId
+                url : "https://circlews.herokuapp.com/inviteUserToEvent?fromUser="+CurrentUser+"&toUser="+invitedTo+"&evantID="+eventId
              }).then(function mySucces(response) {
                     console.log("success responce from server in invite user to event function");
              }, function myError(response) {

@@ -429,3 +429,91 @@ exports.isUserExist=function(req,res){
             }
         });
  }
+
+ exports.addNewEvent=function(req,res){
+        console.log("test: in addNewEvent function");
+        console.log(req.query);
+        //res.json("ok");
+        res.writeHead(301,
+          {Location: 'http://GOOGLE.COM/'}
+        );
+        res.end();
+         //var urlPart=url.parse(req.url,true);
+         var query=req.query;
+         console.log("query is is:" + query);
+         
+        var eventName=query.name;
+        console.log("eventName is is:" + eventName);
+
+        var eventCategory=query.category;
+        console.log(" eventCategory is is:" + eventCategory);
+
+        var eventDate=query.date;
+        console.log("eventDate is is:" + eventDate);
+
+        var eventTime=query.time;
+        console.log(" eventTime is is:" + eventTime);
+
+        var eventPrice=query.price;
+        console.log(" eventPrice is is:" + eventPrice);
+
+
+        var eventDistance=query.distance;
+        console.log(" eventDistance is is:" + eventDistance);
+
+         var eventShortDescription=query.short_description;
+        console.log("eventShortDescription is is: " + eventShortDescription);
+
+        var eventLongDescription=query.long_description;
+        console.log("eventLongDescription is is:" + eventLongDescription);
+
+
+         //var eventCategory=urlPart.category;
+      
+        // var eventDate=query.eventDate;
+        //  var eventTime=query.eventTime;
+        //  var eventPrice=query.eventPrice;
+        //  var eventDistance=query.eventDistance;
+        // console.log("name is: "+eventName+ " category is: "+eventCategory+" date is:"+eventDate+" time is:" +eventTime+"price is:"+eventPrice+" distance:"+eventDistance);
+        
+
+
+
+        // var eventName=query.eventName;
+        // var toUser=query.toUser;
+        // var eventId=query.evantID;
+        // console.log("fromUser is: " +fromUser+" toUser is: "+toUser+ " evantID is "+eventId);
+        // //updating the "from" user document
+        // myFromJson= {"event_id": eventId,
+        //     "friend_email": toUser,
+        //     "status": "waiting"}
+        // var query= userModel.update({email: fromUser},{
+        //     $addToSet:{invited_events:myFromJson}
+        // });
+        // query.exec(function(err,results){
+        //     if(err){
+        //         console.log("err is:"+err);
+        //     }
+        //     else{
+        //         console.log("\n finishing Update doc: "+fromUser+"with: "+myFromJson);
+        //     }
+        // });
+
+        // //updating the "to" user document
+        // myToJson= {"event_id": eventId,
+        //     "status": "waiting",
+        //     "invited_by": fromUser}
+        // var query2= userModel.update({email: toUser},{
+        //     $addToSet:{invited_to:myToJson}
+        // });
+        // query2.exec(function(err,results){
+        //     if(err){
+        //         console.log("err is:"+err);
+        //     }
+        //     else{
+        //         console.log("\n finishing Update doc: "+toUser+"with: "+myToJson);
+        //     }
+        // });
+
+
+ }

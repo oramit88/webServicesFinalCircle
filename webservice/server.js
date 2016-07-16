@@ -28,7 +28,6 @@ app.get('/getEventsByCategory/:category',eventsModuleController.getEventsByCateg
 app.get('/getAllUsers',eventsModuleController.getAllUsers);
 app.get('/setLikeToEvent/:eventId',eventsModuleController.setLikeToEvent);
 app.get('/setUnLikeToEvent/:eventId',eventsModuleController.setUnLikeToEvent);
-//need to change getLikeEventsByUser
 app.get('/getEventsByUser/:userMail',eventsModuleController.getEventsByUser);
 app.get('/getFriendsByUserMail/:userMail',eventsModuleController.getFriendsByUserMail);
 
@@ -36,13 +35,10 @@ app.get('/getFriendsByUserMail/:userMail',eventsModuleController.getFriendsByUse
 //EXAMPLE - http://localhost:3000/findEventsByTimeAndPrice?time=21:00&price=90&cat=NIGHTLIFE
 app.get('/findEventsByTimeAndPrice',eventsModuleController.findEventsByTimeAndPrice);
 
-
-//working!
 //localhost:3000/getEvantsThatUserInvaitedTo/oramit88@gmail.com
 app.get('/getEvantsThatUserInvaitedTo/:userMail',eventsModuleController.getEvantsThatUserInvaitedTo);
 
 //THE USER SEND INVITATION TO SOMEONE
-//DIMA SAIS IN ORDER TO DO WITH 2 PARAMETER .../:arg1/:arg2
 //SEE YONITS POWERPOINT
 app.get('/getEvantsThatUserInvited/:userMail',eventsModuleController.getEvantsThatUserInvited);
 //EXAMPLE- http://localhost:3000/isUserExist/oramitD88@gmail.com
@@ -55,6 +51,8 @@ app.get('/inviteUserToEvent',eventsModuleController.inviteUserToEvent);
 app.get('/isUserLikeEvent',eventsModuleController.isUserLikeEvent);
 
 
+//EXAMPLE - http://localhost:3000/addNewEvent?eventName=euro Final&eventCategory=Music&eventTime=20:30&eventPrice=90&eventDistance=100&eventDate=21/7/2016
+app.get('/addNewEvent',eventsModuleController.addNewEvent);
 
 
 app.listen(port);

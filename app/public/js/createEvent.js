@@ -21,7 +21,6 @@
 //  });
 
  function create(){
-
       var obj1 = document.getElementsByName('name')[0].value;
       console.log(obj1);
 

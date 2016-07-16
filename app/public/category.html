@@ -14,7 +14,7 @@
                   <a href="mainmenu.html?user={{events.CurrentUser}}"><button type="button" class="btn btn-default" id="home"> <span class="glyphicon glyphicon-home"></span></button></a>
               </section>
               <div class="jumbotron">
-                  <h1 class="display-3">{{events.eventsList[index].name}}<img id="myImage" src="../images/unlike.png" ng-click="changeImage()"></h1>
+                  <h1 class="display-3">{{events.eventsList[index].name}}<img id="myImage" src="{{LikeImagePathOfTheHtml}}" ng-click="changeImage()"></h1>
                   <p><a href="#" id="description" class="lead" onclick="hidefunc()">{{events.eventsList[index].short_description}}</a></p>
                   <hr class="m-y-2">
                   <section id="iconPosi">
